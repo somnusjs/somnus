@@ -1,0 +1,34 @@
+{
+  "name": "somnus",
+  "description": "Minimal, database-agnostic API Framework based on Restify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec test/**/*.js",
+    "ex:hw": "node --harmony examples/hello-world | bunyan -o short"
+  },
+  "dependencies": {
+    "bunyan": "^1.5.1",
+    "restify": "^4.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  },
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thesephi/somnus.git"
+  },
+  "author": "Khang Dinh <dk@dklab.co>",
+  "license": "MIT",
+  "keywords": [
+    "knot",
+    "api",
+    "web",
+    "mbaas",
+    "framework",
+    "restify"
+  ]
+}
