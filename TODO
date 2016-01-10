@@ -1,0 +1,4 @@
+- Cover tests for `./examples/hello-world`
+- Consider APIs for generating controllers with ordered chain handlers
+- Consider a mechanism to explore all controllers and their expected parameters, chain handlers, and expected return values
+- Consider a CLI for generating controllers and related thingies

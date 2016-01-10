@@ -3,24 +3,24 @@
 describe('Somnus Framework', function() {
 
   let assert = require('assert');
-  let knot, server;
+  let somnus, server;
 
   before(function() {
     delete require.cache[require.resolve('../')];
-    knot = require('../');
-    server = knot.server;
+    somnus = require('../');
+    server = somnus.server;
     server.log.level('warn');
   });
 
   after(function(done) {
     server = null;
-    knot.destroy(done);
-    knot = null;
+    somnus.destroy(done);
+    somnus = null;
   });
 
   describe('#listen', function() {
     it('should start accepting HTTP requests at some url and port', function(done) {
-      knot.listen(function() {
+      somnus.listen(function() {
         assert.equal(server.url.indexOf('http://'), 0);
         let lastColon = server.url.lastIndexOf(':');
         let assumedPort = parseInt(server.url.substring(lastColon+1));

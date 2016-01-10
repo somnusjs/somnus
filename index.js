@@ -1,3 +1,5 @@
 "use strict";
 let Somnus = require('./lib/somnus');
-module.exports = new Somnus();
+let somnus = new Somnus();
+somnus.init();
+module.exports = somnus;

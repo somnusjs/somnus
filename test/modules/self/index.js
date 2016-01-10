@@ -3,15 +3,15 @@
 describe('Module `Self`', function() {
 
   let assert = require('assert');
-  let knot, server, client;
+  let somnus, server, client;
 
   beforeEach(function(done) {
     delete require.cache[require.resolve('../../../')];
-    knot = require('../../../');
-    server = knot.server;
+    somnus = require('../../../');
+    server = somnus.server;
     server.log.level('warn'); // we might not want 'info' or below levels logging to interfere with mocha reporter
     server.listen(function() {
-      client = knot.restify.createJsonClient({
+      client = somnus.restify.createJsonClient({
         url: server.url,
         agent: false // very important as it prevents keep-alive connections, which takes a while to close, preventing mocha's done() hook to be called properly
       });
@@ -22,8 +22,8 @@ describe('Module `Self`', function() {
   afterEach(function(done) {
     client = null;
     server = null;
-    knot.destroy(done);
-    knot = null;
+    somnus.destroy(done);
+    somnus = null;
   });
 
   describe('[HEAD] /ping', function() {
