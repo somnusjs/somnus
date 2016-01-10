@@ -1,4 +1,6 @@
+- Add docs for **Coding Styles** and **Contribution Rules**, without which, pull requests won't likely get merged
 - Cover tests for `./examples/hello-world`
+- Write more examples and cover tests for them
 - Consider APIs for generating controllers with ordered chain handlers
 - Consider a mechanism to explore all controllers and their expected parameters, chain handlers, and expected return values
 - Consider a CLI for generating controllers and related thingies
