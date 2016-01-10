@@ -12,6 +12,8 @@ npm install somnus
 ## Use
 
 ```
+'use strict';
+
 let somnus = require('somnus');
 
 // create a route
