@@ -1,6 +1,7 @@
 # v1.0.5
 
 - Migrated project Github repo
+- Added travis-ci integration
 - Updated `README`
 - Updated `TODO`
 
