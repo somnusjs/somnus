@@ -1,5 +1,5 @@
 SOMNUS
-========
+======
 
 Minimal, database-agnostic API Framework based on Restify
 
@@ -19,7 +19,7 @@ somnus.get('/', function(req, res, next) {
   res.send('Hello, World');
 });
 
-// start listening to network requests
+// start listening to network HTTP requests
 somnus.listen(function() {
   console.log(`Somnus Framework listening on port ${somnus.getPort()}`);
 });
@@ -60,8 +60,10 @@ Firstly, it's fun for the developer(s). Secondly, it might also be fun for the c
 Somnus is aimed to **make mundane day-to-day web/API development tasks as effortlessly fun as possible while maintaining the smallest codebase possible**. Well, at least that's the original intent of the developer, so if you're considering contributing (which is a beautiful thing), please adhere to the said philosophy!
 
 ## 5. Why database-agnostic?
-`SQL`, `MongoDB`, `RethinkDB` and a plethora of recently emerging database solutions have made it easier and more fun than ever before to play with data. At the same time, it gives framework developers a hard time deciding on any database technology to go with and invest in. Somnus is aimed to make things simple and minimal, not to magnify what's already clunky enough. Hence, it's up to Somnus users to choose the database technologies they feel most suitable to their projects. In fact, Somnus isn't developed with any database driver built-in. It's essentially the only **C** in MVC.
+`SQL`, `MongoDB`, `RethinkDB` and a plethora of recently emerging database solutions have made it easier and more fun than ever before to play with data. At the same time, it gives framework developers a hard time deciding on any database technology to go with and invest in. Somnus is aimed to make things simple and minimal, not to magnify what's already clunky enough. Hence, it's up to Somnus users to choose the database technologies they feel most suitable to their projects.
+
+In fact, Somnus isn't developed with any database driver built-in. It's essentially the only **C** in MVC.
 
 ## 6. How to contribute?
-- Read through the [`README`](./README.md) and see anything worth elaborating on? Go ahead!
-- Read through the [`TODO`](./TODO.md) and see anything up to your interests? Attempt it!
+- Read through the [README](./README.md) and see anything worth elaborating on? Go ahead!
+- Read through the [TODO](./TODO.md) and see anything up to your interests? Attempt it!
