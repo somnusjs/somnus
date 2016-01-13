@@ -5,18 +5,33 @@ Minimal, database-agnostic API Framework based on Restify
 
 [![Build Status](https://travis-ci.org/dklabco/somnus.svg)](https://travis-ci.org/dklabco/somnus)
 
+## Features
+
+Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) NodeJS library. It aims to set up some basic features of a web/API framework, then adding common utilities which can be shared across controllers. All of these tasks might eventually get too repetitive and tedious for any Restify user. The added features include:
+
+- Setting the `Access-Control-Allow-Origin` header to a desired value during setup, or leave blank to use `"*"`, which is a very elaborating value best suited for development or fully-public API-services.
+- Implementing the use of [Bunyan](https://www.npmjs.com/package/bunyan) logger by default. This in turn discourages the spam of `console.log` which seems convenient at first but eventually will turn your project into a mess.
+- Some example test-beds to get you started with running tests for a Restify-based product.
+- Utility / Helper code to help you handle the most trivial tasks during day-to-day web/API development projects.
+
+While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in ExpressJS. Please keep this in mind should you decide to contribute to Somnus!
+
 ## Installation
+
+With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
 
 ```
 npm install somnus
 ```
 
-## Use
+## Usage
 
 ```
 'use strict';
 
-let somnus = require('somnus');
+let somnus = require('somnus').init({
+  accessControlAllowOrigin: '*'
+});
 
 // create a route
 somnus.get('/', function(req, res, next) {
@@ -31,7 +46,7 @@ somnus.listen(function() {
 
 ## Examples
 
-Please take a look at `./examples/hello-world/index.js` source code for a more verbose usage example. To run the Hello World example itself, do the following in your
+Please take a look at [the Hello World example](./examples/hello-world/index.js) source code for a more verbose usage example. To run the Hello World example itself, do the following in your
 terminal:
 
 ```
@@ -47,6 +62,13 @@ npm test
 ```
 
 The name of test files should reflect their corresponding library and module files' names and directory structure.
+
+## Migration
+
+- From 1.0.x to 1.1.x:
+
+  There is a breaking change. Before, it was `let somnus = require('somnus');`, now it is `let somnus = require('somnus').init();`. This allows passing in an optional config object to initialize Somnus. One use for it is to pass the key `accessControlAllowOrigin` with a desired value.
+
 
 FAQs
 ====

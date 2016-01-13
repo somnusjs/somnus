@@ -7,7 +7,7 @@ describe('Module `Self`', function() {
 
   beforeEach(function(done) {
     delete require.cache[require.resolve('../../../')];
-    somnus = require('../../../');
+    somnus = require('../../../').init();
     server = somnus.server;
     server.log.level('warn'); // we might not want 'info' or below levels logging to interfere with mocha reporter
     server.listen(function() {

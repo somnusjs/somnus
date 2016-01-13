@@ -1,7 +1,7 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic API Framework based on Restify",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec test/**/*.js",
@@ -20,6 +20,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dklabco/somnus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dklabco/somnus/issues",
+    "email": "gate@dklab.co"
   },
   "author": "Khang Dinh <dk@dklab.co>",
   "license": "MIT",

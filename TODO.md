@@ -1,4 +1,5 @@
 - Add docs for **Coding Styles** and **Contribution Rules**, without which, pull requests won't likely get merged
+- Consider a pre-defined HTTP endpoint listing all routes being registered under the form { HTTP_VERB, ROUTE_PATH }
 - Consider the implementation of log rotation
 - Cover tests for `./examples/hello-world`
 - Write more examples and cover tests for them

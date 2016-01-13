@@ -7,7 +7,7 @@ describe('Somnus Framework', function() {
 
   before(function() {
     delete require.cache[require.resolve('../')];
-    somnus = require('../');
+    somnus = require('../').init();
     server = somnus.server;
     server.log.level('warn');
   });

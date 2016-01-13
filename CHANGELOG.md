@@ -1,3 +1,10 @@
+# v1.1.0
+
+- Explicitly requiring initializing the framework with the syntax `require('somenus').init()`
+- Updated `README`
+- Updated `TODO`
+- Version 1.1.0 deprecates all versions below it (1.0.x)
+
 # v1.0.5
 
 - Migrated project Github repo

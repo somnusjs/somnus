@@ -2,8 +2,10 @@
 
 // declare the Somnus Framework instance
 // note that in your production project, you'll do something like
-// `let somnus = require('somnus')`
-let somnus = require('../../');
+// `let somnus = require('somnus').init()`
+let somnus = require('../../').init({
+  accessControlAllowOrigin: '*'
+});
 
 // set up a basic route for [GET] / to return a plain text message 'Hello, World'
 somnus.get('/', function(req, res, next) {

@@ -1,5 +1,12 @@
 "use strict";
-let Somnus = require('./lib/somnus');
-let somnus = new Somnus();
-somnus.init();
-module.exports = somnus;
+
+function init(opts) {
+  let Somnus = require('./lib/somnus');
+  let somnus = new Somnus(opts);
+  somnus.init();
+  return somnus;
+}
+
+module.exports = {
+  init: init
+}
