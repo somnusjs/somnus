@@ -1,3 +1,8 @@
+# v1.1.2
+
+- Updated `TODO` and `README`
+- Updated dependencies
+
 # v1.1.0
 
 - Explicitly requiring initializing the framework with the syntax `require('somnus').init()`
