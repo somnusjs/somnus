@@ -2,6 +2,7 @@
 - Implement `enforcedParams` helper
 - Implement an opinionated `BaseController` with the **Chain Builder** mechanism
 - Implement an opinionated `Route` mechanism
+- Consider enforcing `development` as the default value of `process.env.NODE_ENV` as a de-facto setting.
 - Add warnings & fatal exiting for optional & mandatory ENV variables respectively
 - Add docs for **Coding Styles** and **Contribution Rules**, without which, pull requests won't likely get merged
 - Consider a pre-defined HTTP endpoint listing all routes being registered under the form { HTTP_VERB, ROUTE_PATH }

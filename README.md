@@ -16,6 +16,12 @@ Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/
 
 While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in ExpressJS. Please keep this in mind should you decide to contribute to Somnus!
 
+## Developer & User notices
+
+Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of NodeJS](https://github.com/nodejs/LTS) (for example `4.2.0` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others.
+
+Currently, we have no plan to make Somnus compatible with old NodeJS versions (such as `0.10.x` or `0.12.x`). While we're very sorry about this, we also believe it is for everyone's common interests to aim for the latest standards. If you have a very specific reason to use Somnus with an outdated NodeJS flavor, please [drop us a word](mailto:gate@dklab.co) and we'll see if there's any way we can help!
+
 ## Installation
 
 With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
