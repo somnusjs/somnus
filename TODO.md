@@ -1,5 +1,5 @@
-- Default to NodeJS v6
-- Implement `enforcedParams` helper
+- Default to NodeJS v6 [when the time comes](https://github.com/nodejs/LTS)
+- Implement the `enforcedParams` helper
 - Implement an opinionated `BaseController` with the **Chain Builder** mechanism
 - Implement an opinionated `Route` mechanism
 - Consider enforcing `development` as the default value of `process.env.NODE_ENV` as a de-facto setting.
