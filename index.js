@@ -1,8 +1,8 @@
 "use strict";
 
 function init(opts) {
-  let Somnus = require('./lib/somnus');
-  let somnus = new Somnus(opts);
+  const Somnus = require('./dist/somnus').default;
+  const somnus = new Somnus(opts);
   somnus.init();
   return somnus;
 }

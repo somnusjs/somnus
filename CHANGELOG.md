@@ -1,3 +1,8 @@
+# v2.0.0
+
+- Enforced NodeJS 6.x.x
+- Introduced some dep dependencies to enable the `async-await` syntax
+
 # v1.1.2
 
 - Updated `TODO` and `README`

@@ -71,10 +71,20 @@ The name of test files should reflect their corresponding library and module fil
 
 ## Migration
 
+- From 1.1.x to 2.x.x
+
+  v2.0.0 marks the transitioning to NodeJS v6, which enables a lot of new ES sweetness
+  while using `babel` to allow the `async-await` syntax. There is no obvious
+  breaking changes, except that you must use NodeJS >= 6.1.0. If you got errors
+  related to `dtrace-provider`, please remove that npm module, then install it
+  again.
+
 - From 1.0.x to 1.1.x:
 
-  There is a breaking change. Before, it was `let somnus = require('somnus');`, now it is `let somnus = require('somnus').init();`. This allows passing in an optional config object to initialize Somnus. One use for it is to pass the key `accessControlAllowOrigin` with a desired value.
-
+  There is a breaking change. Before, it was `let somnus = require('somnus');`,
+  now it is `let somnus = require('somnus').init();`. This allows passing in an
+  optional config object to initialize Somnus. One use for it is to pass the key
+  `accessControlAllowOrigin` with a desired value.
 
 FAQs
 ====
