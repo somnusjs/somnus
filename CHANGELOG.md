@@ -1,3 +1,9 @@
+# v1.1.4
+
+- Updated README for a clearer example code snippet
+- Removed the use of an arrow function (`=>`) so that the framework is more widely
+compatible with older NodeJS versions
+
 # v1.1.3
 
 - Removed the use of multiline verbatim string literal (denoted by the back tick

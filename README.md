@@ -33,6 +33,8 @@ npm install somnus
 ## Usage
 
 ```
+// with --harmony flag enabled when starting the Node process
+
 'use strict';
 
 let somnus = require('somnus').init({
