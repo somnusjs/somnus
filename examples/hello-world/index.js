@@ -14,7 +14,7 @@ somnus.get('/', function(req, res, next) {
 });
 
 // starts listening for network requests
-somnus.listen(process.env.PORT, function() {
+somnus.listen(process.env.PORT || 0, function() {
   let now = new Date();
   console.info(
     `%s PID %s -- %s %s listening on port %s`,
