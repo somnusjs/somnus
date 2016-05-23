@@ -1,7 +1,7 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic API Framework based on Restify",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec test/**/*.js",

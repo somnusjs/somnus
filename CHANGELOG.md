@@ -1,3 +1,10 @@
+# v1.1.3
+
+- Removed the use of multiline verbatim string literal (denoted by the back tick
+character), so that the framework is more widely compatible with older NodeJS
+versions
+- Defaulted port number to `0`, meaning NodeJS will choose a random port by default
+
 # v1.1.2
 
 - Updated `TODO` and `README`
