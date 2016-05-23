@@ -46,7 +46,7 @@ somnus.get('/', function(req, res, next) {
 
 // start listening to network HTTP requests
 somnus.listen(function() {
-  console.log(`Somnus Framework listening on port ${somnus.getPort()}`);
+  console.log('Somnus Framework listening on port', somnus.getPort());
 });
 ```
 
