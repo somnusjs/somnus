@@ -16,7 +16,7 @@ let Self = function(framework) {
 
   // api methods to share with other modules via the notation framework.modules[<module_name>]
   return {
-    description: `Metadata & Service Discovery for the ${framework.name} Framework node`,
+    description: 'Metadata & Service Discovery for ' + framework.name,
     endPoints: [{ route: '[HEAD] /ping', description: 'Returns a simple 200 OK' }]
   };
 

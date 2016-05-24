@@ -1,3 +1,8 @@
+# v1.1.5
+
+- Removed the use of multiline verbatim string literal in the `self` module,
+making the framework more widely compatible with older NodeJS versions
+
 # v1.1.4
 
 - Updated README for a clearer example code snippet
