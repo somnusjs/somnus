@@ -30,15 +30,28 @@ With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, s
 npm install somnus
 ```
 
+## Initialization
+
+```
+// for es2015
+let somnus = require('somnus').default.init({
+  accessControlAllowOrigin: '*',
+  modulesDir: './path/to/the/modules/dir/relative/to/my/cwd'
+});
+```
+
+```
+// for es2016 and onwards
+import Somnus from 'somnus'
+const somnus = Somnus.init({
+  accessControlAllowOrigin: '*',
+  modulesDir: './path/to/the/modules/dir/relative/to/my/cwd'
+})
+```
+
 ## Usage
 
 ```
-'use strict';
-
-let somnus = require('somnus').init({
-  accessControlAllowOrigin: '*'
-});
-
 // create a route
 somnus.get('/', function(req, res, next) {
   res.send('Hello, World');
@@ -73,15 +86,19 @@ The name of test files should reflect their corresponding library and module fil
 
 - From 1.1.x to 2.x.x
 
-  v2.0.0 marks the transitioning to NodeJS v6, which enables a lot of new ES sweetness
-  while using `babel` to allow the `async-await` syntax. There is no obvious
-  breaking changes, except that you must use NodeJS >= 6.1.0. If you got errors
-  related to `dtrace-provider`, please remove that npm module, then install it
-  again.
+  v2.0.0 marks the transitioning to es2016, which enables a great deal of new syntax sweetness
+  like using `babel` and `Object.assign` and the `async-await` syntax and much more.
+
+  There is one **breaking change**: before, it was `let somnus = require('somnus').init()`,
+  now it is `let somnus = require('somnus').default.init()`, or you can alternatively
+  follow the `import syntax` as shown in the above initialization example (recommended way also).
+
+  If you got errors related to `dtrace-provider`, please remove that npm module,
+  then install it again.
 
 - From 1.0.x to 1.1.x:
 
-  There is a breaking change. Before, it was `let somnus = require('somnus');`,
+  There is a **breaking change**. Before, it was `let somnus = require('somnus');`,
   now it is `let somnus = require('somnus').init();`. This allows passing in an
   optional config object to initialize Somnus. One use for it is to pass the key
   `accessControlAllowOrigin` with a desired value.

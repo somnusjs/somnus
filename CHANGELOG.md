@@ -1,3 +1,8 @@
+# v2.1.1
+
+- Updated `README`
+- Removed a non-version-controlled file that was unfortunately stuck there during the switch to v2.1.0
+
 # v2.1.0
 
 - Large revamp of project structure
