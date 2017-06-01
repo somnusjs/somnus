@@ -1,9 +1,16 @@
+/**
+ * This file is purposedly written in es2015 so that it can be easily run without
+ * the need for precompilation
+ */
+
 "use strict";
 
 // declare the Somnus Framework instance
 // note that in your production project, you'll do something like
-// `let somnus = require('somnus').init()`
-let somnus = require('../../').init({
+// `import Somnus from 'somnus' ; const somnus = Somnus.init(opts)`
+// or
+// const somnus = require('somnus').init(opts)
+const somnus = require('../../lib').default.init({
   accessControlAllowOrigin: '*'
 });
 
@@ -15,7 +22,7 @@ somnus.get('/', function(req, res, next) {
 
 // starts listening for network requests
 somnus.listen(process.env.PORT || 0, function() {
-  let now = new Date();
+  const now = new Date();
   console.info(
     `%s PID %s -- %s %s listening on port %s`,
     now.toTimeString(),

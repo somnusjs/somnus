@@ -1,3 +1,4 @@
+- Consider changing `modules` into `plugins` throughout the project (the former is okay but we might not want to use such a 'sensitive' term, esp. for NodeJS codebases)
 - [HEAD] /ping should return the `Content-Length: 0` header instead of `Connection: close`. Also change the test suits accordingly
 - Implement the `enforcedParams` helper
 - Implement an opinionated `BaseController` with the **Chain Builder** mechanism

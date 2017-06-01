@@ -1,3 +1,9 @@
+# v2.1.0
+
+- Large revamp of project structure
+- Added another init opt: `modulesDir` which defaults to `./modules` (relative to `process.cwd()`)
+- Updated dependencies
+
 # v2.0.0
 
 - Enforced NodeJS 6.x.x

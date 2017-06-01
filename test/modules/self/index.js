@@ -1,4 +1,4 @@
-"use strict";
+import Somnus from '../../../src/index'
 
 describe('Module `Self`', function() {
 
@@ -6,8 +6,8 @@ describe('Module `Self`', function() {
   let somnus, server, client;
 
   beforeEach(function(done) {
-    delete require.cache[require.resolve('../../../')];
-    somnus = require('../../../').init();
+    delete require.cache[require.resolve('../../../src/index')];
+    somnus = Somnus.init({modulesDir: './src/modules'});
     server = somnus.server;
     server.log.level('warn'); // we might not want 'info' or below levels logging to interfere with mocha reporter
     server.listen(function() {

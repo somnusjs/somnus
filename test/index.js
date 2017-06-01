@@ -1,4 +1,4 @@
-"use strict";
+import Somnus from '../src/index';
 
 describe('Somnus Framework', function() {
 
@@ -6,8 +6,8 @@ describe('Somnus Framework', function() {
   let somnus, server;
 
   before(function() {
-    delete require.cache[require.resolve('../')];
-    somnus = require('../').init();
+    delete require.cache[require.resolve('../src/index')];
+    somnus = Somnus.init({modulesDir: './src/modules'});
     server = somnus.server;
     server.log.level('warn');
   });
