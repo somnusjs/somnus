@@ -1,3 +1,4 @@
+- [HEAD] /ping should return the `Content-Length: 0` header instead of `Connection: close`. Also change the test suits accordingly
 - Implement the `enforcedParams` helper
 - Implement an opinionated `BaseController` with the **Chain Builder** mechanism
 - Implement an opinionated `Route` mechanism
