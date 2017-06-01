@@ -1,3 +1,8 @@
+# v1.2.0
+
+- Updated dependencies
+- Added package-lock.json to make npm@5 more happy
+
 # v1.1.5
 
 - Removed the use of multiline verbatim string literal in the `self` module,
