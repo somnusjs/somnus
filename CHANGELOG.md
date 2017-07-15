@@ -1,3 +1,7 @@
+# v2.2.0
+
+- Updated dependencies
+
 # v2.1.1
 
 - Updated `README`
