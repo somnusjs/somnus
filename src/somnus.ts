@@ -1,4 +1,4 @@
-import { Somnus, ISomnusStartOptions } from '../src/somnus.d';
+import { ISomnus, ISomnusStartOptions } from '../src/somnus.d';
 import * as restify from 'restify';
 import * as RestifyErrors from 'restify-errors';
 import * as bunyan from 'bunyan';
@@ -6,21 +6,21 @@ import * as bunyan from 'bunyan';
 // defaults to `debug` during development,
 // can be explicitly set to 'trace' during truly desperate times
 let logLevel: bunyan.LogLevel  = 'debug';
-switch(process.env.NODE_ENV) {
+switch (process.env.NODE_ENV) {
   case 'production' :
     logLevel = 'warn';
-  break;
+    break;
   case 'staging' :
     logLevel = 'info';
-  break;
+    break;
 }
 
 const server: restify.Server = restify.createServer({
   name: 'somnus',
   log: bunyan.createLogger({
     name: 'somnusDefaultLogger',
-    level: process.env.LOG_LEVEL as bunyan.LogLevel || logLevel
-  })
+    level: process.env.LOG_LEVEL as bunyan.LogLevel || logLevel,
+  }),
 });
 
 const logger: bunyan = server.log;
@@ -37,45 +37,45 @@ server.use(restify.plugins.bodyParser({ mapParams: true }));
 
 // catch all
 server.on('restifyError', (req, res, err, cb) => {
-  if(!err.handled) {
-    logger.error({ 'unhandleRestifyError': err });
+  if (!err.handled) {
+    logger.error({ unhandleRestifyError: err });
   }
   return cb();
 });
 
-const somnus: Somnus = {
+const somnus: ISomnus = {
 
   server, // should not be used heavily in userland; included for advanced uses only
   restify, // should not be used heavily in userland; included for advanced uses only
   logger,
 
-  start: function(): void {
+  start(): void {
 
     let opts: ISomnusStartOptions | undefined;
     let cb: (addr: restify.AddressInterface) => void | undefined;
-    switch(arguments.length) {
+    switch (arguments.length) {
       case 2 :
         opts = arguments[0] || {};
         cb = arguments[1];
-      break;
+        break;
       case 1 :
-        if(typeof arguments[0] === 'function') {
+        if (typeof arguments[0] === 'function') {
           cb = arguments[0];
-        } else if(typeof arguments[0] === 'object') {
+        } else if (typeof arguments[0] === 'object') {
           opts = arguments[0];
         }
-      break;
+        break;
       case 0 :
         // do nothing
-      break;
+        break;
       default :
         throw new Error('Too many arguments');
     }
 
-    if(opts) {
+    if (opts) {
 
       let pair: string[];
-      for(let key in opts.routeConfig) {
+      for (const key in opts.routeConfig) {
         pair = key.replace(/\s{2,}/g, ' ').split(' ');
         const [verb, path] = pair;
         const handler: restify.RequestHandlerType = opts.routeConfig[key];
@@ -89,20 +89,20 @@ const somnus: Somnus = {
       logger.info(`somnus framework listening at ${addr.port}`);
       logger.info(`built for ENV: ${process.env.NODE_ENV}`);
       logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
-      if(cb) {
+      if (cb) {
         cb(addr);
       }
     });
 
   },
 
-  stop: (cb?): void => server.close(cb)
+  stop: (cb?): void => server.close(cb),
 
-}
+};
 
 export {
   somnus,
-  RestifyErrors
-}
+  RestifyErrors,
+};
 
-export default somnus
+export default somnus;

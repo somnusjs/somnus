@@ -1,12 +1,12 @@
-import { Somnus, RouteConfig } from "../src/somnus.d";
+import { ISomnus, IRouteConfig } from "../src/somnus.d";
 
 // this is actually declared in `setup.js` that runs before all tests
-declare const somnus: Somnus;
+declare const somnus: ISomnus;
 
 import * as assert from 'assert';
 import fetch, { Response } from 'node-fetch';
 
-describe("somnus", () => {
+describe('somnus', () => {
 
   let currentPort: number = NaN;
 
@@ -15,7 +15,7 @@ describe("somnus", () => {
     somnus.stop(done);
   });
 
-  describe("without routeConfig", () => {
+  describe('without routeConfig', () => {
 
     before((done) => {
       somnus.start((addr): void => {
@@ -24,15 +24,15 @@ describe("somnus", () => {
       });
     });
 
-    it("should listen", () => {
+    it('should listen', () => {
       assert(isNaN(currentPort) === false);
     });
 
   });
 
-  describe("with routeConfig", () => {
+  describe('with routeConfig', () => {
 
-    const routeConfig: RouteConfig = {
+    const routeConfig: IRouteConfig = {
       'get /hello': [
         (req, res, next) => next(),
         (req, res, next) => res.send('world')
@@ -46,7 +46,7 @@ describe("somnus", () => {
       });
     });
 
-    it("should respond as configured", (done) => {
+    it('should respond as configured', (done) => {
       fetch(`http://127.0.0.1:${currentPort}/hello`, {
         headers: { 'Accept': 'application/json' }
       })
