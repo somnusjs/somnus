@@ -1,7 +1,6 @@
-## [3.0.0-rc2] - 2018-12-23
-
-## [3.0.0-rc1] - 2018-12-23
-### First 3.0.0 Release Candidate
-
-## [3.0.0-alpha1] - 2018-12-23
-### First 3.0.0 Alpha Release
+## [3.0.0] - 2018-12-23
+### Changed
+- Complete rewrite over `somnus@2`
+- New APIs on old philosophies: make REST API fun, simple, and productive
+- Breaking change: `somnus@3` can only be installed afresh, and cannot be 'upgraded' from any of the previous versions
+- New repo address (`somnusjs/somnus`)

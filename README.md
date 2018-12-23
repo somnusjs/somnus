@@ -3,7 +3,7 @@ SOMNUS
 
 Minimal, database-agnostic API Framework based on Restify
 
-[![Build Status](https://travis-ci.org/dklabco/somnus.svg)](https://travis-ci.org/dklabco/somnus)
+[![Build Status](https://travis-ci.org/somnusjs/somnus.svg)](https://travis-ci.org/somnusjs/somnus)
 
 ## Features
 
