@@ -4,12 +4,12 @@
  * needed and you can run this example directly with `ts-node`
  */
 
-// for your production code, do `import somnus, { RouteConfig } from 'somnus'`
+// for your production code, do `import somnus, { IRouteConfig } from 'somnus'`
 // as opposed to importing them separately from `src` as seen here
 import somnus from '../../src/somnus';
-import { RouteConfig } from '../../src/somnus.d';
+import { IRouteConfig } from '../../src/somnus.d';
 
-const routeConfig: RouteConfig = {
+const routeConfig: IRouteConfig = {
   'get /hello': [
     (req, res, next): void => next(),
     (req, res, next): void => res.send('world')

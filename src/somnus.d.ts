@@ -1,35 +1,30 @@
 import * as restify from 'restify';
 import * as bunyan from 'bunyan';
 
-export type RouteConfig = {
+export interface IRouteConfig {
   // 'get /hello' : (req, res, next) => res.send('world')
   [routeSignature: string]: restify.RequestHandlerType;
 }
 
 export interface ISomnusStartOptions {
-  routeConfig: RouteConfig;
+  routeConfig: IRouteConfig;
 }
 
-declare namespace SomnusNS {
+declare function start(arg?: ISomnusStartOptions | ((addr: restify.AddressInterface) => void)): void;
+declare function start(opts?: ISomnusStartOptions, cb?: (addr: restify.AddressInterface) => void): void;
 
-  function start(cb?: (addr: restify.AddressInterface) => void): void;
-  function start(opts?: ISomnusStartOptions): void;
-  function start(opts?: ISomnusStartOptions, cb?: (addr: restify.AddressInterface) => void): void;
+declare function stop(cb?: () => any): void;
 
-  function stop(cb?: () => any): void;
+export interface ISomnus {
 
-  type Somnus = {
+  server: restify.Server;
+  restify: typeof restify;
+  logger: bunyan;
 
-    server: restify.Server;
-    restify: typeof restify;
-    logger: bunyan;
+  start: typeof start;
+  stop: typeof stop;
 
-    start: typeof start;
-    stop: typeof stop;
-
-  };
 }
 
-export type Somnus = SomnusNS.Somnus;
-declare const somnus: Somnus;
+declare const somnus: ISomnus;
 export default somnus;

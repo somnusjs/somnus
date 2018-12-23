@@ -5,11 +5,15 @@
   "main": "lib/somnus.js",
   "types": "lib/somnus.d.ts",
   "scripts": {
-    "prepare": "npm run build:prod",
-    "prepublishOnly": "npm i && TARGET_DIST_BUILD=true npm test",
+    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
+    "prebuild:prod": "npm run tslint",
+    "prebuild": "npm run tslint",
+    "pretest": "npm run tslint",
     "build:prod": "./scripts/build.sh",
     "build": "NODE_ENV=development ./scripts/build.sh",
     "test": "mocha --require ts-node/register --file test/setup.js -R spec test/**/*.ts",
+    "prepare": "npm run build:prod",
+    "prepublishOnly": "npm i && TARGET_DIST_BUILD=true npm test",
     "start": "npm run example:helloworld:ts",
     "example:helloworld:ts": "LOG_LEVEL=info PORT=3001 ts-node examples/helloworld-ts | bunyan -o short",
     "example:helloworld:js": "LOG_LEVEL=info node examples/helloworld-js | bunyan -o short"
@@ -33,6 +37,7 @@
     "mocha": "^5.2.0",
     "node-fetch": "^2.3.0",
     "ts-node": "^7.0.1",
+    "tslint": "^5.12.0",
     "typescript": "^3.2.2",
     "webpack": "^5.0.0-alpha.0",
     "webpack-cli": "^3.1.2"
