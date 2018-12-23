@@ -7,4 +7,4 @@ webpack.config.js
 .tmp
 deprecated
 test
-example
+examples

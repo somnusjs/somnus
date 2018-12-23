@@ -11,7 +11,7 @@ Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/
 
 - setup your web/API platform in the shortest time possible
 - implement the use of [Bunyan](https://www.npmjs.com/package/bunyan) logger by default. This in turn discourages the spam of `console.log` which seems convenient at first but eventually will turn your project into a mess
-- package utility/helper functions supporting the repetitive, trivial tasks during day-to-day web/API development projects.
+- with utility/helper functions supporting the repetitive, trivial tasks during day-to-day web/API development projects.
 
 While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in ExpressJS. Please keep this in mind should you decide to contribute to Somnus!
 
@@ -24,8 +24,28 @@ Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence,
 With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
 
 ```
+// installs a production build of this framework from the global npm repo
 npm install somnus
 ```
+
+## Build
+
+> Note: this section is only for contributors. If you only need to use Somnus, the installation step above is enough.
+
+You can build the framework yourself by checking out this repository, `cd`ing into it then running the `build` or `build:prod` npm script, for example:
+
+```
+// installs the toolchains needed for the build process
+npm install
+
+// outputs a development build into `lib/`
+npm run build
+
+// or if you want a production build
+npm run build:prod
+```
+
+> TBA: explain the difference between development and production builds
 
 ## Usage
 
@@ -42,13 +62,14 @@ somnus.start({
 
 ## ENV variables
 
-```
-// to be documented
-```
+- `HOST`: the host at which the underlying `http` server listens, defaults to `localhost`
+- `PORT`: the port at which the underlying `http` server listens, defaults to a random available port on your system
+- `LOG_LEVEL`: enum of [bunyan log levels](https://github.com/trentm/node-bunyan#levels). If set, this will overwrite the default value, which is `warn` for production build and `debug` for development build.
+- `TARGET_DIST_BUILD`: **only used** when running tests. If true, the tests are run against the build artifact (`lib/somnus.js`); otherwise, the source file (`src/somnus.ts`)
 
 ## Types
 
-For those loving TypeScript: type-def for Somnus is backed directly into the npm package so you don't have to install anything else. If your IDE doesn't seem to pick up the definitions automatically, please manually check/import the `node_modules/somnus/lib/somnus.d.ts` file!
+For those loving TypeScript: type-def for Somnus is backed directly into the build artifact so you don't have to install anything else. If your IDE somehow doesn't pick up the definitions automatically, please manually check/import the `node_modules/somnus/lib/somnus.d.ts` file.
 
 ## Test
 
@@ -84,4 +105,4 @@ Somnus is aimed to **make mundane day-to-day web/API development tasks as effort
 In fact, Somnus isn't developed with any database driver built-in. It's essentially the **C** in MVC.
 
 ## 6. How may I contribute?
-- Currently, there is no formal contribution guide. It probably makes sense to start there!
+Currently, there is no formal contribution guide. It probably makes sense to start there!

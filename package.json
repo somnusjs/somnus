@@ -1,17 +1,18 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic API Framework based on Restify",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "lib/somnus.js",
   "types": "lib/somnus.d.ts",
   "scripts": {
     "prepare": "npm run build:prod",
-    "prepublishOnly": "npm i && TEST_BUILD=true npm test",
+    "prepublishOnly": "npm i && TARGET_DIST_BUILD=true npm test",
     "build:prod": "./scripts/build.sh",
     "build": "NODE_ENV=development ./scripts/build.sh",
-    "test": "LOG_LEVEL=warn mocha --require ts-node/register -R spec test/**/*.ts",
-    "helloworld": "ts-node example/helloworld | bunyan -o short",
-    "start": "PORT=3001 LOG_LEVEL=info npm run helloworld"
+    "test": "mocha --require ts-node/register --file test/setup.js -R spec test/**/*.ts",
+    "start": "npm run example:helloworld:ts",
+    "example:helloworld:ts": "LOG_LEVEL=info PORT=3001 ts-node examples/helloworld-ts | bunyan -o short",
+    "example:helloworld:js": "LOG_LEVEL=info node examples/helloworld-js | bunyan -o short"
   },
   "dependencies": {
     "bunyan": "^1.8.12",

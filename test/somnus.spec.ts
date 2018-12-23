@@ -1,11 +1,7 @@
 import { Somnus, RouteConfig } from "../src/somnus.d";
 
-// normally, it's enough to test against source files, but if we're skeptical
-// about @babel/preset-typescript and/or webpack, it is also possible to test
-// directly against the build artefacts by setting the env `TEST_BUILD` to `true`
-const somnus: Somnus = process.env.TEST_BUILD === 'true'
-  ? require('../lib/somnus').default // if we want to test against the final output in ./lib
-  : require('../src/somnus').default; // if we want to test against files in ./src
+// this is actually declared in `setup.js` that runs before all tests
+declare const somnus: Somnus;
 
 import * as assert from 'assert';
 import fetch, { Response } from 'node-fetch';

@@ -87,8 +87,8 @@ const somnus: Somnus = {
     server.listen(process.env.PORT, process.env.HOST, (): void => {
       const addr: restify.AddressInterface = server.address();
       logger.info(`somnus framework listening at ${addr.port}`);
-      logger.info(`built for: ${process.env.NODE_ENV}`);
-      logger.info(`logger level: ${logger.level()}`);
+      logger.info(`built for ENV: ${process.env.NODE_ENV}`);
+      logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
       if(cb) {
         cb(addr);
       }
