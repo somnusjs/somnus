@@ -60,8 +60,8 @@ npm test
 
 ## Migration
 
-- If you have never used **somnus@1.x** or **somnus@2.x**, migration is of no concern for you
-- If you are using **somnus@1.x** or **somnus@2.x**, please understand that **somnus@3** is completely rewritten, and there is no migration path at all between v2 and v3. v3 exposes a different set of APIs and philosophies behind how the entire framework should be used.
+- If you have never used **somnus@1** or **somnus@2**, migration is of no concern for you
+- If you are using **somnus@1** or **somnus@2**, please understand that **somnus@3** is completely rewritten, and there is no migration path at all between v2 and v3. v3 exposes a different set of APIs and philosophies behind how the entire framework should be used.
 
 FAQs
 ====
