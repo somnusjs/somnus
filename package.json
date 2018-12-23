@@ -1,43 +1,55 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic API Framework based on Restify",
-  "version": "2.2.0",
-  "main": "lib/index.js",
+  "version": "3.0.0",
+  "main": "lib/somnus.js",
+  "types": "lib/somnus.d.ts",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "babel src --out-dir lib",
-    "test": "mocha --require babel-register -R spec test/**/*.js",
-    "ex:hw": "node --harmony examples/hello-world | bunyan -o short"
+    "prepare": "npm run build:prod",
+    "build:prod": "./scripts/build.sh",
+    "build": "NODE_ENV=development ./scripts/build.sh",
+    "test": "mocha --require ts-node/register -R spec test/**/*.ts",
+    "helloworld": "ts-node example/helloworld | bunyan -o short",
+    "start": "npm run helloworld"
   },
   "dependencies": {
-    "bunyan": "^1.8.1",
-    "restify": "^4.3.1"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-typescript": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "@types/bunyan": "^1.8.5",
+    "@types/mocha": "^5.2.5",
+    "@types/restify": "^7.2.6",
+    "@types/restify-errors": "^4.3.3",
+    "bunyan": "^1.8.12",
+    "mocha": "^5.2.0",
+    "restify": "^7.3.0",
+    "restify-errors": "^6.1.1",
+    "webpack": "^5.0.0-alpha.0",
+    "webpack-cli": "^3.1.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-register": "^6.24.1",
-    "mocha": "^3.4.2"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   },
   "engines": {
-    "node": ">= 6.1.0"
+    "node": ">= 10.14.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dklabco/somnus.git"
+    "url": "https://github.com/somnusjs/somnus"
   },
   "bugs": {
-    "url": "https://github.com/dklabco/somnus/issues",
-    "email": "gate@dklab.co"
+    "url": "https://github.com/somnusjs/somnus/issues",
+    "email": "thesephi@gmail.com"
   },
-  "author": "Khang Dinh <dk@dklab.co>",
+  "author": "Khang Dinh <thesephi@gmail.com>",
   "license": "MIT",
   "keywords": [
     "somnus",
     "api",
     "web",
-    "mbaas",
     "framework",
     "restify"
   ]

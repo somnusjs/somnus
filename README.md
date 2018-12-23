@@ -18,9 +18,7 @@ While the original developer's intention is to add commonly essential features o
 
 ## Developer & User notices
 
-Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of NodeJS](https://github.com/nodejs/LTS) (for example `4.2.0` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others.
-
-Currently, we have no plan to make Somnus compatible with old NodeJS versions (such as `0.10.x` or `0.12.x`). While we're very sorry about this, we also believe it is for everyone's common interests to aim for the latest standards. If you have a very specific reason to use Somnus with an outdated NodeJS flavor, please [drop us a word](mailto:gate@dklab.co) and we'll see if there's any way we can help!
+Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of NodeJS](https://github.com/nodejs/LTS) (for example `10.14.2` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
 
 ## Installation
 
@@ -30,37 +28,10 @@ With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, s
 npm install somnus
 ```
 
-## Initialization
-
-```
-// for es2015
-let somnus = require('somnus').default.init({
-  accessControlAllowOrigin: '*',
-  modulesDir: './path/to/the/modules/dir/relative/to/my/cwd'
-});
-```
-
-```
-// for es2016 and onwards
-import Somnus from 'somnus'
-const somnus = Somnus.init({
-  accessControlAllowOrigin: '*',
-  modulesDir: './path/to/the/modules/dir/relative/to/my/cwd'
-})
-```
-
 ## Usage
 
 ```
-// create a route
-somnus.get('/', function(req, res, next) {
-  res.send('Hello, World');
-});
-
-// start listening to network HTTP requests
-somnus.listen(function() {
-  console.log(`Somnus Framework listening on port ${somnus.getPort()}`);
-});
+// to be documented
 ```
 
 ## Examples
@@ -84,24 +55,8 @@ The name of test files should reflect their corresponding library and module fil
 
 ## Migration
 
-- From 1.1.x to 2.x.x
-
-  v2.0.0 marks the transitioning to es2016, which enables a great deal of new syntax sweetness
-  like using `babel` and `Object.assign` and the `async-await` syntax and much more.
-
-  There is one **breaking change**: before, it was `let somnus = require('somnus').init()`,
-  now it is `let somnus = require('somnus').default.init()`, or you can alternatively
-  follow the `import syntax` as shown in the above initialization example (recommended way also).
-
-  If you got errors related to `dtrace-provider`, please remove that npm module,
-  then install it again.
-
-- From 1.0.x to 1.1.x:
-
-  There is a **breaking change**. Before, it was `let somnus = require('somnus');`,
-  now it is `let somnus = require('somnus').init();`. This allows passing in an
-  optional config object to initialize Somnus. One use for it is to pass the key
-  `accessControlAllowOrigin` with a desired value.
+- If you have never used `somnus@1.x.x` or `somnus@2.x.x`, migration is of no concern for you
+- If you are using `somnus@1.x.x` or `somnus@2.x.x`, please understand that `somnus@3` is completely rewritten, and there is no migration path at all between v2 and v3. v3 exposes a different set of APIs and philosophies behind how the entire framework should be used.
 
 FAQs
 ====

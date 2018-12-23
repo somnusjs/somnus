@@ -27,3 +27,6 @@ Temporary Items
 lib
 node_modules
 *.log
+
+tmp
+deprecated
