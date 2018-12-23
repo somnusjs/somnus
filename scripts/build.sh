@@ -19,5 +19,3 @@ webpack ./tmp/somnus.js \
 --output-library-target commonjs \
 --target node \
 --mode $WEBPACK_MODE
-
-cp src/somnus.d.ts lib/

@@ -1,9 +1,16 @@
 import * as restify from 'restify';
 import * as bunyan from 'bunyan';
 
-declare namespace SomnusNS {
+export type RouteConfig = {
+  // 'get /hello' : (req, res, next) => res.send('world')
+  [routeSignature: string]: restify.RequestHandlerType;
+}
 
-  interface ISomnusStartOptions {}
+export interface ISomnusStartOptions {
+  routeConfig: RouteConfig;
+}
+
+declare namespace SomnusNS {
 
   function start(opts?: ISomnusStartOptions): void;
   function start(opts?: ISomnusStartOptions, cb?: (addr: restify.AddressInterface) => void): void;
@@ -22,5 +29,4 @@ declare namespace SomnusNS {
 declare const somnus: SomnusNS.Somnus;
 
 export type Somnus = SomnusNS.Somnus;
-export interface ISomnusStartOptions extends SomnusNS.ISomnusStartOptions {}
 export default somnus;
