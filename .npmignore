@@ -4,7 +4,7 @@ scripts
 .travis.yml
 webpack.config.js
 
-tmp
+.tmp
 deprecated
 test
 example

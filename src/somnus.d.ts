@@ -12,8 +12,11 @@ export interface ISomnusStartOptions {
 
 declare namespace SomnusNS {
 
+  function start(cb?: (addr: restify.AddressInterface) => void): void;
   function start(opts?: ISomnusStartOptions): void;
   function start(opts?: ISomnusStartOptions, cb?: (addr: restify.AddressInterface) => void): void;
+
+  function stop(cb?: () => any): void;
 
   type Somnus = {
 
@@ -22,11 +25,11 @@ declare namespace SomnusNS {
     logger: bunyan;
 
     start: typeof start;
+    stop: typeof stop;
 
   };
 }
 
-declare const somnus: SomnusNS.Somnus;
-
 export type Somnus = SomnusNS.Somnus;
+declare const somnus: Somnus;
 export default somnus;

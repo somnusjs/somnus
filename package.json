@@ -1,18 +1,24 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic API Framework based on Restify",
-  "version": "3.0.0-alpha1",
+  "version": "3.0.0-rc1",
   "main": "lib/somnus.js",
-  "types": "types/somnus.d.ts",
+  "types": "lib/somnus.d.ts",
   "scripts": {
     "prepare": "npm run build:prod",
+    "prepublishOnly": "npm i && TEST_BUILD=true npm test",
     "build:prod": "./scripts/build.sh",
     "build": "NODE_ENV=development ./scripts/build.sh",
-    "test": "mocha --require ts-node/register -R spec test/**/*.ts",
+    "test": "LOG_LEVEL=warn mocha --require ts-node/register -R spec test/**/*.ts",
     "helloworld": "ts-node example/helloworld | bunyan -o short",
-    "start": "PORT=3001 npm run helloworld"
+    "start": "PORT=3001 LOG_LEVEL=info npm run helloworld"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
+    "restify": "^7.3.0",
+    "restify-errors": "^6.1.1"
+  },
+  "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
@@ -20,18 +26,15 @@
     "@babel/register": "^7.0.0",
     "@types/bunyan": "^1.8.5",
     "@types/mocha": "^5.2.5",
+    "@types/node-fetch": "^2.1.4",
     "@types/restify": "^7.2.6",
     "@types/restify-errors": "^4.3.3",
-    "bunyan": "^1.8.12",
     "mocha": "^5.2.0",
-    "restify": "^7.3.0",
-    "restify-errors": "^6.1.1",
+    "node-fetch": "^2.3.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2",
     "webpack": "^5.0.0-alpha.0",
     "webpack-cli": "^3.1.2"
-  },
-  "devDependencies": {
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
   },
   "engines": {
     "node": ">= 10.14.2"

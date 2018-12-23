@@ -1,8 +1,7 @@
 // for your production code, do `import somnus, { RouteConfig } from 'somnus'`
-// for this example, we import `somnus` and its type declarations separately
-// as seen below
-import { RouteConfig } from '../../types/somnus.d';
+// as opposed to importing them separately as seen here
 import somnus from '../../src/somnus';
+import { RouteConfig } from '../../src/somnus.d';
 
 const routeConfig: RouteConfig = {
   'get /hello': [

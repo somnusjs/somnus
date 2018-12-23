@@ -28,5 +28,5 @@ lib
 node_modules
 *.log
 
-tmp
+.tmp
 deprecated
