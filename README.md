@@ -71,6 +71,8 @@ somnus.start({
 
 For those loving TypeScript: type-def for Somnus is backed directly into the build artifact so you don't have to install anything else. If your IDE somehow doesn't pick up the definitions automatically, please manually check/import the `node_modules/somnus/lib/somnus.d.ts` file.
 
+Also, as Somnus bases on Restify, you may benefit from installing `@types/restify` and `@types/restify-errors` in addition (Somnus doesn't back them in for you).
+
 ## Test
 
 The following command will run all tests found under `./test` and its subdirectories:
