@@ -4,6 +4,7 @@ SOMNUS
 Minimal, database-agnostic API Framework based on Restify
 
 [![Build Status](https://travis-ci.org/somnusjs/somnus.svg)](https://travis-ci.org/somnusjs/somnus)
+[![Package Quality](http://npm.packagequality.com/shield/somnus.svg)](http://packagequality.com/#?package=somnus)
 
 ## Features
 
