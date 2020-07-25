@@ -1,3 +1,11 @@
+## [8.0.0] - 2020-07-25
+### Changed
+- upgraded multiple dependencies, most notably restify@8
+- updated webpack build command to support existing `import` and `require` APIs
+
+### Added
+- more unit tests
+
 ## [3.0.1] - 2018-12-23
 ### Changed
 - renamed the ENV var `TEST_BUILD` into `TARGET_DIST_BUILD`

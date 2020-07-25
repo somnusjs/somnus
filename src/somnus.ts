@@ -11,6 +11,7 @@ switch (process.env.NODE_ENV) {
     logLevel = 'warn';
     break;
   case 'staging' :
+  default:
     logLevel = 'info';
     break;
 }

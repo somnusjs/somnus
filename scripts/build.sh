@@ -15,8 +15,8 @@ babel src --out-dir .tmp --extensions '.ts' --ignore 'src/**/*.d.ts'
 echo "webpack is building for $WEBPACK_MODE"
 webpack .tmp/somnus.js \
 -o lib/somnus.js \
---output-library somnus \
---output-library-target commonjs2 \
+--output-library var \
+--output-library-target umd \
 --target node \
 --mode $WEBPACK_MODE
 

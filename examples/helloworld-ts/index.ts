@@ -1,13 +1,10 @@
 /**
  * This is a TypeScript example of using Somnus.
- * As somnus is taken straight from the `src` directory, there is no build step
- * needed and you can run this example directly with `ts-node`
+ * This requires a successful build (`npm run build`) so that the build artfacts
+ * can be found in the `lib` directory, otherwise this example will fail to run.
  */
 
-// for your production code, do `import somnus, { IRouteConfig } from 'somnus'`
-// as opposed to importing them separately from `src` as seen here
-import somnus from '../../src/somnus';
-import { IRouteConfig } from '../../src/somnus.d';
+import somnus, { IRouteConfig } from '../../lib/somnus';
 
 const routeConfig: IRouteConfig = {
   'get /hello': [

@@ -1,10 +1,10 @@
 SOMNUS
 ======
 
-Minimal, database-agnostic API Framework based on Restify
+Minimal, database-agnostic REST API Framework based on Restify
 
 [![Build Status](https://travis-ci.org/somnusjs/somnus.svg)](https://travis-ci.org/somnusjs/somnus)
-[![Package Quality](http://npm.packagequality.com/shield/somnus.svg)](http://packagequality.com/#?package=somnus)
+[![Package Quality](https://npm.packagequality.com/shield/somnus.svg)](https://packagequality.com/#?package=somnus)
 
 ## Features
 
@@ -72,7 +72,7 @@ somnus.start({
 
 For those loving TypeScript: type-def for Somnus is backed directly into the build artifact so you don't have to install anything else. If your IDE somehow doesn't pick up the definitions automatically, please manually check/import the `node_modules/somnus/lib/somnus.d.ts` file.
 
-Also, as Somnus bases on Restify, you may benefit from installing `@types/restify` and `@types/restify-errors` in addition (Somnus doesn't back them in for you).
+Also, as Somnus bases itself on Restify, you may benefit from installing `@types/restify` and `@types/restify-errors` in addition (Somnus doesn't bake them in for you).
 
 ## Test
 
@@ -82,8 +82,15 @@ The following command will run all tests found under `./test` and its subdirecto
 npm test
 ```
 
+Why do we run tests for both `src` and `lib` directories? Because as library authors, we're responsible for ensuring that the build process transpiles & outputs as it should, and the best way to do that is by testing the code from both source and dist.
+
 ## Migration
 
+### from v3 to v8
+- the **somnus@8** API itself is backward compatible, so you should expect no breaking changes in this space
+- as `somnus` is always just a thin wrapper around `restify`, its major version will always match that of `restify`. Please consult the corresponding [Restify migration guide](http://restify.com/docs/home/) for breaking changes regarding Restify internal itself.
+
+### from below to v3
 - If you have never used **somnus@1** or **somnus@2**, migration is of no concern for you
 - If you are using **somnus@1** or **somnus@2**, please understand that **somnus@3** is completely rewritten, and there is no migration path at all between v2 and v3. v3 exposes a different set of APIs and philosophies behind how the entire framework should be used.
 
