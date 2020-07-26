@@ -24,8 +24,8 @@ Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence,
 
 With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
 
-```
-// installs a production build of this framework from the global npm repo
+```bash
+# installs a production build of this framework from the global npm repo
 npm install somnus
 ```
 
@@ -35,14 +35,14 @@ npm install somnus
 
 You can build the framework yourself by checking out this repository, `cd`ing into it then running the `build` or `build:prod` npm script, for example:
 
-```
-// installs the toolchains needed for the build process
+```bash
+# installs the toolchains needed for the build process
 npm install
 
-// outputs a development build into `lib/`
+# outputs a development build into `lib/`
 npm run build
 
-// or if you want a production build
+# or if you want a production build
 npm run build:prod
 ```
 
@@ -50,15 +50,26 @@ npm run build:prod
 
 ## Usage
 
-```
+```javascript
 import somnus from 'somnus';
 // or const somnus = require('somnus').default;
 
+// you can add route via the standard syntax
+// as you would normally do with `express` or `restify`
+somnus.server.get('/echo', (req, res) => res.send('echo echo'));
+
+// or you can add routes by declaring a `routeConfig` object,
+// which is then passed into `somnus.start()` method
 somnus.start({
   routeConfig: {
     'get /hello': (req, res) => res.send('world')
   }
 });
+
+// from now on, all routes added above are available. Go ahead and test these
+// paths with `curl` or your favourite web browser:
+// - `/echo`
+// - `/hello`
 ```
 
 ## ENV variables
@@ -78,7 +89,7 @@ Also, as Somnus bases itself on Restify, you may benefit from installing `@types
 
 The following command will run all tests found under `./test` and its subdirectories:
 
-```
+```bash
 npm test
 ```
 
