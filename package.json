@@ -15,8 +15,7 @@
     "test:src": "TARGET_DIST_BUILD=false npm run test:base",
     "test:dist": "TARGET_DIST_BUILD=true npm run test:base",
     "test": "npm run test:src && npm run test:dist",
-    "prepare": "npm run build:prod",
-    "prepublishOnly": "npm i && npm test",
+    "prepublishOnly": "npm i; npm run build:prod; npm test",
     "start": "npm run example:helloworld:ts",
     "example:helloworld:ts": "LOG_LEVEL=info PORT=3001 ts-node examples/helloworld-ts | bunyan -o short",
     "example:helloworld:js": "LOG_LEVEL=info node examples/helloworld-js | bunyan -o short"
