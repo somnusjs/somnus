@@ -77,10 +77,25 @@ const somnus: ISomnus = {
 
       let pair: string[];
       for (const key in opts.routeConfig) {
-        pair = key.replace(/\s{2,}/g, ' ').split(' ');
-        const [verb, path] = pair;
+
+        pair = key.trim().replace(/\s{2,}/g, ' ').split(' ');
+
+        if (pair.length !== 2) {
+          throw new Error('Malformed `routeConfig`');
+        }
+
+        const [rawVerb, path] = pair;
         const handler: restify.RequestHandlerType = opts.routeConfig[key];
+
+        // sanitize user-provided HTTP verbs
+        let verb = rawVerb.trim().toLowerCase().replace(/(\W|_|\d)/g, '');
+        if (verb === 'delete') {
+          verb = 'del';
+        }
+
+        // e.g. server.get('/some-route', someHandler)
         server[verb](path, handler);
+
       }
 
     }

@@ -30,7 +30,23 @@ describe('somnus', () => {
 
   });
 
-  describe('with `routeConfig`', () => {
+  describe('with a malformed `routeConfig`', () => {
+
+    const malformedRouteConfig: IRouteConfig = {
+      'get /bad route config': (req, res) => res.send(500)
+    };
+
+    it('should throw the correct error', () => {
+      assert.throws(() => {
+        somnus.start({ routeConfig: malformedRouteConfig }, (addr): void => {
+          currentPort = addr.port;
+        });
+      }, new Error('Malformed `routeConfig`'));
+    });
+
+  });
+
+  describe('with a standard `routeConfig`', () => {
 
     const routeConfig: IRouteConfig = {
       'get /echo': [
@@ -41,7 +57,9 @@ describe('somnus', () => {
         (req, res, next) => next(),
         (req, res, next) => res.send({ foo: req.params.foo })
       ],
-      'put /echo': (req, res) => res.send({ message: req.params })
+      '   put /echo': (req, res) => res.send({ message: req.params }),
+      'delete /echo': (req, res) => res.send({ message: '`delete` understood as `del`' }),
+      '<>{}\~/patch*!@#$%^&()   /echo': (req, res) => res.send({ message: 'weird verbs? no problemo' })
     };
 
     beforeEach((done) => {
@@ -69,7 +87,7 @@ describe('somnus', () => {
         });
     });
 
-    it('should respond as configured', (done) => {
+    it('should handle extra spaces before HTTP verbs in `routeConfig`', (done) => {
       fetch(`http://127.0.0.1:${currentPort}/echo`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -91,6 +109,28 @@ describe('somnus', () => {
         .then((resp: Response) => resp.json())
         .then((resp: { foo: unknown }) => {
           assert(resp.foo === 'bar');
+          done();
+        });
+    });
+
+    it('should understand `delete` HTTP verb as `del`', (done) => {
+      fetch(`http://127.0.0.1:${currentPort}/echo`, {
+        method: 'DELETE'
+      })
+        .then((resp: Response) => resp.json())
+        .then((resp: { message: unknown }) => {
+          assert(resp.message === '`delete` understood as `del`');
+          done();
+        });
+    });
+
+    it('should handle weird characters in standard HTTP verbs', (done) => {
+      fetch(`http://127.0.0.1:${currentPort}/echo`, {
+        method: 'PATCH'
+      })
+        .then((resp: Response) => resp.json())
+        .then((resp: { message: unknown }) => {
+          assert(resp.message === 'weird verbs? no problemo');
           done();
         });
     });

@@ -3,6 +3,9 @@
 - upgraded multiple dependencies, most notably restify@8
 - updated webpack build command to support existing `import` and `require` APIs
 
+### Fixed
+- issue #2: using `delete` as HTTP method name in `routeConfig` crashes the process
+
 ### Added
 - more unit tests
 
