@@ -8,7 +8,7 @@ Minimal, database-agnostic REST API Framework based on Restify
 
 ## Features
 
-Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) NodeJS library. It aims to set up some basic features of a web/API framework by adding (sometimes opinionated) out-of-the-box configurations on top of the bare-bone Restify. In short, it helps you:
+Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) Node.js library. It aims to set up some basic features of a web/API framework by adding (sometimes opinionated) out-of-the-box configurations on top of the bare-bone Restify. In short, it helps you:
 
 - setup your web/API platform in the shortest time possible
 - implement the use of [Bunyan](https://www.npmjs.com/package/bunyan) logger by default. This in turn discourages the spam of `console.log` which seems convenient at first but eventually will turn your project into a mess
@@ -18,11 +18,11 @@ While the original developer's intention is to add commonly essential features o
 
 ## Developer & User notices
 
-Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of NodeJS](https://github.com/nodejs/LTS) (for example `10.14.2` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
+Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of Node.js](https://github.com/nodejs/LTS) (for example `10.14.2` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
 
 ## Installation
 
-With [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
+With [Node.js](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
 
 ```bash
 # installs a production build of this framework from the global npm repo
