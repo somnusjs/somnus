@@ -1,7 +1,7 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic REST API Framework based on Restify",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "main": "lib/somnus.js",
   "types": "lib/somnus.d.ts",
   "scripts": {
@@ -11,17 +11,19 @@
     "pretest": "npm run tslint",
     "build:prod": "./scripts/build.sh",
     "build": "NODE_ENV=development ./scripts/build.sh",
-    "test:base": "mocha --require ts-node/register --file test/setup.js -R spec test/**/*.ts",
+    "test:base": "mocha --require ts-node/register --file test/setup.js -R spec test/**/*.ts test/*.ts",
     "test:src": "TARGET_DIST_BUILD=false npm run test:base",
     "test:dist": "TARGET_DIST_BUILD=true npm run test:base",
     "test": "npm run test:src && npm run test:dist",
     "prepublishOnly": "npm i; npm run build:prod; npm test",
     "start": "npm run example:helloworld:ts",
-    "example:helloworld:ts": "LOG_LEVEL=info PORT=3001 ts-node examples/helloworld-ts | bunyan -o short",
-    "example:helloworld:js": "LOG_LEVEL=info node examples/helloworld-js | bunyan -o short"
+    "example:helloworld:ts": "./scripts/run-example.js helloworld-ts",
+    "example:helloworld:js": "./scripts/run-example.js helloworld-js",
+    "example:unixsocket": "./scripts/run-example.js unix-socket"
   },
   "dependencies": {
     "bunyan": "^1.8.14",
+    "gracefulize": "^1.0.0",
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2"
   },

@@ -54,17 +54,16 @@ npm run build:prod
 import somnus from 'somnus';
 // or const somnus = require('somnus').default;
 
-// you can add route via the standard syntax
+// you can add routes via the standard syntax
 // as you would normally do with `express` or `restify`
 somnus.server.get('/echo', (req, res) => res.send('echo echo'));
 
 // or you can add routes by declaring a `routeConfig` object,
-// which is then passed into `somnus.start()` method
-somnus.start({
-  routeConfig: {
-    'get /hello': (req, res) => res.send('world')
-  }
-});
+// which is then passed into `somnus.start()`
+const routeConfig = {
+  'get /hello': (req, res) => res.send('world')
+}
+somnus.start({ routeConfig });
 
 // from now on, all routes added above are available. Go ahead and test these
 // paths with `curl` or your favourite web browser:
@@ -74,6 +73,7 @@ somnus.start({
 
 ## ENV variables
 
+- `UNIX_SOCKET`: the unix socket at which the underlying `http` server listens, defaults to `undefined`, taking precedence over `HOST` and `PORT` (explained below) when defined
 - `HOST`: the host at which the underlying `http` server listens, defaults to `localhost`
 - `PORT`: the port at which the underlying `http` server listens, defaults to a random available port on your system
 - `LOG_LEVEL`: enum of [bunyan log levels](https://github.com/trentm/node-bunyan#levels). If set, this will overwrite the default value, which is `warn` for production build and `debug` for development build.
