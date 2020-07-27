@@ -16,6 +16,10 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
+const UNIX_SOCKET: string | undefined = process.env.UNIX_SOCKET && process.env.UNIX_SOCKET !== ''
+  ? process.env.UNIX_SOCKET
+  : undefined;
+
 const server: restify.Server = restify.createServer({
   name: 'somnus',
   log: bunyan.createLogger({
@@ -25,6 +29,9 @@ const server: restify.Server = restify.createServer({
 });
 
 const logger: bunyan = server.log;
+
+// tslint:disable-next-line:no-var-requires
+require('gracefulize')(server, { log: logger.info.bind(logger) });
 
 // things to take care of for the users:
 // bodyParser
@@ -44,7 +51,7 @@ server.on('restifyError', (req, res, err, cb) => {
   return cb();
 });
 
-const somnus: ISomnus = {
+const somnus: ISomnus = Object.assign(Object.create(null), {
 
   server, // should not be used heavily in userland; included for advanced uses only
   restify, // should not be used heavily in userland; included for advanced uses only
@@ -100,21 +107,28 @@ const somnus: ISomnus = {
 
     }
 
-    server.listen(process.env.PORT, process.env.HOST, (): void => {
-      const addr: restify.AddressInterface = server.address();
-      logger.info(`somnus framework listening at ${addr.port}`);
-      logger.info(`built for ENV: ${process.env.NODE_ENV}`);
-      logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
-      if (cb) {
-        cb(addr);
-      }
-    });
+    if (UNIX_SOCKET) {
+      server.listen(UNIX_SOCKET, onStarted.bind(undefined, cb));
+    } else {
+      server.listen(process.env.PORT, process.env.HOST, onStarted.bind(undefined, cb));
+    }
 
   },
 
   stop: (cb?): void => server.close(cb),
 
-};
+});
+
+function onStarted(cb?: (addr: restify.AddressInterface) => void): void {
+  const addr: restify.AddressInterface = server.address();
+  const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
+  logger.info(`somnus framework listening at ${effectiveAddr}`);
+  logger.info(`built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
+  logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
+  if (cb) {
+    cb(addr);
+  }
+}
 
 export {
   somnus,

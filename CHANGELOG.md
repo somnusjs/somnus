@@ -1,3 +1,14 @@
+## [8.1.0] - 2020-07-27
+### Changed
+- examples are no longer run directly from 'npm scripts' but via `scripts/run-example.js`
+- examples are run in such a manner that the main process is not killed before the child process fully exits
+- the exported `somnus` object is now created via `Object.create(null)`
+
+### Added
+- env var `UNIX_SOCKET` (please see README for details)
+- example code for starting `somnus` on a unix socket
+- unix socket -related test cases
+
 ## [8.0.0] - 2020-07-25
 ### Changed
 - upgraded multiple dependencies, most notably restify@8
