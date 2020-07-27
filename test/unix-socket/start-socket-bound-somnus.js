@@ -18,6 +18,7 @@ const routeConfig = {
 
 async function main() {
 
+  // we can ensure the `import()` syntax is supported in older Node.js versions by using the `--experimental-modules` flag
   mod = await import(modulePath);
 
   // module cache busting so we get a clean import on the next test suite, which isn't 'polluted' by `process.env.UNIX_SOCKET`

@@ -11,7 +11,7 @@ function spawnSomnusServerAsChildProcess(): ChildProcess {
   const modulePath = `${__dirname}/start-socket-bound-somnus.js`;
   return fork(modulePath, {
     execPath: process.argv[0],
-    execArgv: [],
+    execArgv: ['--experimental-modules'],
     env: {
 
       UNIX_SOCKET: TEST_UNIX_SOCKET,
