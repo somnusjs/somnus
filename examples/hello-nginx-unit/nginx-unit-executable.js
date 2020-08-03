@@ -7,7 +7,7 @@
 
 const somnus = require('../../lib/somnus').default;
 
-somnus.logger.info({
+somnus.logger.debug({
   'http.Server': somnus.server.server
 });
 
