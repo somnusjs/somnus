@@ -1,3 +1,12 @@
+// until the `NXT_UNIT_INIT` env var is more verbosely documented, we admit that we
+// are using it at our own risk to determine when a Node.js process was started by
+// NGINX Unit. Related info [here](https://github.com/nginx/unit/issues/230)
+const PROC_WAS_STARTED_BY_NGINX_UNIT: boolean = process.env.NXT_UNIT_INIT != null;
+
+if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
+  nginxUnitPatch();
+}
+
 import { ISomnus, ISomnusStartOptions } from '../src/somnus.d';
 import * as restify from 'restify';
 import * as RestifyErrors from 'restify-errors';
@@ -119,14 +128,22 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 
 });
 
-function onStarted(cb?: (addr: restify.AddressInterface) => void): void {
-  const addr: restify.AddressInterface = server.address();
-  const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
-  logger.info(`somnus framework listening at ${effectiveAddr}`);
-  logger.info(`built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
-  logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
-  if (cb) {
-    cb(addr);
+function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
+  if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
+    logger.info(`somnus framework started by NGINX Unit`);
+    logger.info(`ensure you configure NGINX Unit as instructed here: https://unit.nginx.org/howto/samples/#node-js`);
+    if (cb) {
+      cb();
+    }
+  } else {
+    const addr: restify.AddressInterface = server.address();
+    const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
+    logger.info(`somnus framework listening at ${effectiveAddr}`);
+    logger.info(`built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
+    logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
+    if (cb) {
+      cb(addr);
+    }
   }
 }
 
@@ -136,3 +153,16 @@ export {
 };
 
 export default somnus;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function nginxUnitPatch() {
+  const unitHttp = require('unit-http');
+  const http = require('http');
+  // patch the `http::createServer` method before `restify` uses it
+  http.createServer = unitHttp.createServer.bind(unitHttp);
+  // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L33
+  require('restify/lib/request')(unitHttp.IncomingMessage);
+  // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L32
+  require('restify/lib/response')(unitHttp.ServerResponse);
+}

@@ -27,6 +27,9 @@
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2"
   },
+  "peerDependencies": {
+    "unit-http": "^1.18.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.5",
