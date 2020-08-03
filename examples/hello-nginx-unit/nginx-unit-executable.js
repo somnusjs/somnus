@@ -5,11 +5,10 @@
  * can be found in the `lib` directory, otherwise this example will fail to run.
  */
 
-const somnus = require('../../lib/unit').default;
+const somnus = require('../../lib/somnus').default;
 
 somnus.logger.info({
-  'from': '../../lib/unit',
-  'unit-http': somnus.server.server
+  'http.Server': somnus.server.server
 });
 
 somnus.start({
@@ -17,6 +16,9 @@ somnus.start({
     'get /hello': (req, res) => res.send('unit')
   }
 });
+
+// now you can use this file as the `executable` for an `external`-type nginx unit
+// application as [documented here](https://unit.nginx.org/howto/samples/#node-js)
 
 /**
  * This is an example of using barebone Node.js http server with nginx unit (`unit-http`)

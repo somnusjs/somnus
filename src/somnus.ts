@@ -1,3 +1,7 @@
+if (process.env.NXT_UNIT_INIT != null) {
+  nginxUnitPatch();
+}
+
 import { ISomnus, ISomnusStartOptions } from '../src/somnus.d';
 import * as restify from 'restify';
 import * as RestifyErrors from 'restify-errors';
@@ -142,3 +146,16 @@ export {
 };
 
 export default somnus;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function nginxUnitPatch() {
+  const unitHttp = require('unit-http');
+  const http = require('http');
+  // patch the `http::createServer` method before `restify` uses it
+  http.createServer = unitHttp.createServer.bind(unitHttp);
+  // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L33
+  require('restify/lib/request')(unitHttp.IncomingMessage);
+  // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L32
+  require('restify/lib/response')(unitHttp.ServerResponse);
+}

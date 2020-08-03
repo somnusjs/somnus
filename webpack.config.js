@@ -3,8 +3,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    somnus: './.tmp/somnus.js',
-    unit: './.tmp/somnus-nginx-unit.js'
+    // combined with `output.{path|filename}` (seen below), the line below shall produce `./lib/somnus.js` for the corresponding entry
+    somnus: './.tmp/somnus.js'
   },
   externals: {
     'unit-http': 'commonjs unit-http'
@@ -13,7 +13,7 @@ module.exports = {
   mode: process.env.WEBPACK_MODE,
   output: {
     path: path.resolve(__dirname, 'lib'),
-    filename: '[name].js',
+    filename: '[name].js', // mapped to named inputs in `entry` above
     library: 'var',
     libraryTarget: 'umd'
   },
@@ -21,9 +21,9 @@ module.exports = {
     __dirname: false,
   },
   resolve: {
-    extensions: ['.wasm', '.mjs', '.js', '.json'] // add '.node' if we really want to bundle 'unit-http'
+    extensions: ['.wasm', '.mjs', '.js', '.json'] // add '.node' if we really want to bundle 'unit-http' (but we don't)
   },
-  // install and enable 'node-loader' if we really want to bundle 'unit-http'
+  // install and enable 'node-loader' if we really want to bundle 'unit-http' (but we don't)
   // module: {
   //   rules: [
   //     {
