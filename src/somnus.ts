@@ -1,3 +1,6 @@
+// until the `NXT_UNIT_INIT` env var is more verbosely documented, we admit that we
+// are using it at our own risk to determine when a Node.js process was started by
+// NGINX Unit. Related info [here](https://github.com/nginx/unit/issues/230)
 const PROC_WAS_STARTED_BY_NGINX_UNIT: boolean = process.env.NXT_UNIT_INIT != null;
 
 if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
