@@ -1,3 +1,13 @@
+## [8.2.0-alpha.1] - 2020-08-03
+### Changed
+- wording in the README file
+
+### Added
+- support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/)
+
+### Removed
+- the file `tslint.json` from the npm distribution package
+
 ## [8.1.0] - 2020-07-27
 ### Changed
 - examples are no longer run directly from 'npm scripts' but via `scripts/run-example.js`

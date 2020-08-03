@@ -8,13 +8,14 @@ Minimal, database-agnostic REST API Framework based on Restify
 
 ## Features
 
-Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) Node.js library. It aims to set up some basic features of a web/API framework by adding (sometimes opinionated) out-of-the-box configurations on top of the bare-bone Restify. In short, it helps you:
+Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) Node.js library. It aims to set up foundational features of a web/API framework by adding (sometimes opinionated) out-of-the-box configurations on top of the bare-bone Restify. In short, it helps you:
 
-- setup your web/API platform in the shortest time possible
+- set up your web/API platform in the shortest time possible
 - implement the use of [Bunyan](https://www.npmjs.com/package/bunyan) logger by default. This in turn discourages the spam of `console.log` which seems convenient at first but eventually will turn your project into a mess
-- with utility/helper functions supporting the repetitive, trivial tasks during day-to-day web/API development projects.
+- add utility/helper functions supporting the repetitive, trivial tasks during day-to-day web/API development projects
+- integrate with [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) seamlessly
 
-While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in ExpressJS. Please keep this in mind should you decide to contribute to Somnus!
+While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in [Express.js](https://expressjs.com/). Please keep this in mind should you decide to contribute to Somnus!
 
 ## Developer & User notices
 
@@ -70,6 +71,14 @@ somnus.start({ routeConfig });
 // - `/echo`
 // - `/hello`
 ```
+
+## Usage with NGINX Unit
+
+Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) comes out-of-the-box starting from `somnus@8.2.0`. You only need to:
+1. take an existing `somnus` application (where `somnus` is upgraded to at least v8.2.0)
+2. add the line `#!/usr/bin/env node` on top of the entry file
+3. make the file executable (e.g. `chmod +x /path/to/your/entry.js`)
+4. and voilà, you can start it up with NGINX Unit as instructed in [this tutorial](https://unit.nginx.org/howto/samples/#node-js)
 
 ## ENV variables
 
