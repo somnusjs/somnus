@@ -119,14 +119,20 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 
 });
 
-function onStarted(cb?: (addr: restify.AddressInterface) => void): void {
-  const addr: restify.AddressInterface = server.address();
-  const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
-  logger.info(`somnus framework listening at ${effectiveAddr}`);
-  logger.info(`built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
-  logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
+function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
+  if (process.env.NXT_UNIT_INIT == null) {
+    const addr: restify.AddressInterface = server.address();
+    const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
+    logger.info(`somnus framework listening at ${effectiveAddr}`);
+    logger.info(`built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
+    logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
+    if (cb) {
+      cb(addr);
+    }
+    return;
+  }
   if (cb) {
-    cb(addr);
+    cb();
   }
 }
 

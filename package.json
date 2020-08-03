@@ -25,7 +25,8 @@
     "bunyan": "^1.8.14",
     "gracefulize": "^1.0.0",
     "restify": "^8.5.1",
-    "restify-errors": "^8.0.2"
+    "restify-errors": "^8.0.2",
+    "unit-http": "^1.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
