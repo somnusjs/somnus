@@ -1,4 +1,6 @@
-if (process.env.NXT_UNIT_INIT != null) {
+const PROC_WAS_STARTED_BY_NGINX_UNIT: boolean = process.env.NXT_UNIT_INIT != null;
+
+if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
   nginxUnitPatch();
 }
 
@@ -124,7 +126,13 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 });
 
 function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
-  if (process.env.NXT_UNIT_INIT == null) {
+  if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
+    logger.info(`somnus framework started by NGINX Unit`);
+    logger.info(`ensure you configure NGINX Unit as instructed here: https://unit.nginx.org/howto/samples/#node-js`);
+    if (cb) {
+      cb();
+    }
+  } else {
     const addr: restify.AddressInterface = server.address();
     const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
     logger.info(`somnus framework listening at ${effectiveAddr}`);
@@ -133,10 +141,6 @@ function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
     if (cb) {
       cb(addr);
     }
-    return;
-  }
-  if (cb) {
-    cb();
   }
 }
 
