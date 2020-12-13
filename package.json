@@ -1,7 +1,7 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic REST API Framework based on Restify",
-  "version": "8.2.0-alpha.1",
+  "version": "8.2.0-alpha.2",
   "main": "lib/somnus.js",
   "types": "lib/somnus.d.ts",
   "scripts": {
@@ -27,7 +27,7 @@
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "unit-http": "^1.18.0"
   },
   "devDependencies": {

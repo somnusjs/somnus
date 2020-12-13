@@ -21,6 +21,8 @@ While the original developer's intention is to add commonly essential features o
 
 Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of Node.js](https://github.com/nodejs/LTS) (for example `10.14.2` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
 
+Starting v8.2.0, somnus has Nginx Unit integration support. If you fail to install Unit's language module for Node.js (`npm i unit-http`), be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
+
 ## Installation
 
 With [Node.js](https://nodejs.org) and [npm](https://www.npmjs.com/) installed, simply run:
@@ -75,10 +77,13 @@ somnus.start({ routeConfig });
 ## Usage with NGINX Unit
 
 Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) comes out-of-the-box starting from `somnus@8.2.0`. You only need to:
-1. take an existing `somnus` application (where `somnus` is upgraded to at least v8.2.0)
-2. add the line `#!/usr/bin/env node` on top of the entry file
-3. make the file executable (e.g. `chmod +x /path/to/your/entry.js`)
-4. and voilà, you can start it up with NGINX Unit as instructed in [this tutorial](https://unit.nginx.org/howto/samples/#node-js)
+1. take an existing `somnus`-based application (where `somnus` is at least at v8.2.0)
+2. install the `unit-http` module (`npm i unit-http`)
+  - if you fail to install this module, be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
+3. add the line `#!/usr/bin/env node` on top of the entry file of your app
+4. make the entry file executable (e.g. `chmod +x /path/to/your/entry.js`)
+
+and voilà, you can start it up with NGINX Unit as instructed in [this tutorial](https://unit.nginx.org/howto/samples/#node-js)
 
 ## ENV variables
 
