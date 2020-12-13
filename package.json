@@ -27,7 +27,7 @@
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "unit-http": "^1.18.0"
   },
   "devDependencies": {

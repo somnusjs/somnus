@@ -1,6 +1,8 @@
-## [8.2.0-alpha.1] - 2020-08-03
+## [8.2.0-alpha.2] - 2020-12-13
 ### Changed
 - wording in the README file
+- added webpack config `output.globalObject`
+- `unit-http` to become an optional dependency
 
 ### Added
 - support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/)
