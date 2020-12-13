@@ -2,6 +2,7 @@
 ### Changed
 - wording in the README file
 - added webpack config `output.globalObject`
+- updated webpack config `output.library`
 - `unit-http` to become an optional dependency
 
 ### Added
