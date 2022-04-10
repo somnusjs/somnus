@@ -1,3 +1,9 @@
+## [8.2.1] - 2022-04-10
+### Changed
+- merged dependabledot security-fix PRs
+- upgraded `webpack` library version to a stable one
+- synced `package-lock.json` content
+
 ## [8.2.0] - 2022-04-10
 ### Changed
 - updated README
