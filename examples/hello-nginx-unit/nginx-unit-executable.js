@@ -11,9 +11,12 @@ somnus.logger.debug({
   'http.Server': somnus.server.server
 });
 
+const { IS_NGINX_UNIT_MANUAL_PATCH_MODE } = process.env
+
 somnus.start({
   routeConfig: {
-    'get /hello': (req, res) => res.send('unit')
+    'get /': (req, res) => res.send('hello, nginx unit !'),
+    'get /check': (req, res) => res.send({ IS_NGINX_UNIT_MANUAL_PATCH_MODE })
   }
 });
 
@@ -22,7 +25,9 @@ somnus.start({
 
 /**
  * This is an example of using barebone Node.js http server with nginx unit (`unit-http`)
- * Uncomment it and comment the block above to enable this mode
+ * under manual patch mode (similar to setting `NGINX_UNIT_MANUAL_PATCH_MODE` to
+ * true when starting a somnus-based Node.js server.
+ * Uncomment the lines below and comment out the block above to enable this mode
  */
 // const unitHttp = require('unit-http');
 // const http = require('http');
