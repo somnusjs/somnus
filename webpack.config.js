@@ -14,8 +14,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: '[name].js', // mapped to named inputs in `entry` above
-    library: 'var',
-    libraryTarget: 'umd'
+    library: 'somnus',
+    libraryTarget: 'umd',
+    globalObject: 'this'
   },
   node: {
     __dirname: false,
