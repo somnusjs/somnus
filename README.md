@@ -3,22 +3,25 @@ SOMNUS
 
 Minimal, database-agnostic REST API Framework based on Restify
 
-[![Build Status](https://travis-ci.org/somnusjs/somnus.svg)](https://travis-ci.org/somnusjs/somnus)
+[![Build Status](https://app.travis-ci.com/somnusjs/somnus.svg?branch=master)](https://app.travis-ci.com/somnusjs/somnus)
 [![Package Quality](https://npm.packagequality.com/shield/somnus.svg)](https://packagequality.com/#?package=somnus)
 
 ## Features
 
-Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) Node.js library. It aims to set up some basic features of a web/API framework by adding (sometimes opinionated) out-of-the-box configurations on top of the bare-bone Restify. In short, it helps you:
+Somnus is a very thin layer wrapping around the [Restify](https://www.npmjs.com/package/restify) Node.js library. It aims to set up foundational features of a web/API framework by adding (sometimes opinionated) out-of-the-box configurations on top of the bare-bone Restify. In short, it helps you:
 
-- setup your web/API platform in the shortest time possible
+- set up your web/API platform in the shortest time possible
 - implement the use of [Bunyan](https://www.npmjs.com/package/bunyan) logger by default. This in turn discourages the spam of `console.log` which seems convenient at first but eventually will turn your project into a mess
-- with utility/helper functions supporting the repetitive, trivial tasks during day-to-day web/API development projects.
+- add utility/helper functions supporting the repetitive, trivial tasks during day-to-day web/API development projects
+- integrate with [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) seamlessly
 
-While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in ExpressJS. Please keep this in mind should you decide to contribute to Somnus!
+While the original developer's intention is to add commonly essential features on top of Restify, it's also important to note that the key principal is to keep the codebase as small as possible, living up to Restify's standard of being a lighter library than the colossus we have in [Express.js](https://expressjs.com/). Please keep this in mind should you decide to contribute to Somnus!
 
 ## Developer & User notices
 
 Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of Node.js](https://github.com/nodejs/LTS) (for example `10.14.2` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
+
+Starting v8.2.0, somnus has Nginx Unit integration support. If you fail to install Unit's language module for Node.js (`npm i unit-http`), be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
 
 ## Installation
 
@@ -71,6 +74,19 @@ somnus.start({ routeConfig });
 // - `/hello`
 ```
 
+## Usage with NGINX Unit
+
+Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) is available starting from `somnus@8.2.0`. To use your `somnus`-based application with Nginx Unit, you need to:
+1. ensure the `unit-http` module is installed (`npm i -g unit-http`). Nginx [recommends](https://unit.nginx.org/installation/#node-js) a global installation of this module
+    - if you fail to install this module, be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
+2. `cd` into your existing `somnus`-based application (where `somnus` is at least at v8.2.0)
+3. link `unit-http` into your application (`npm link unit-http`) (as instructed [here](https://unit.nginx.org/howto/samples/#node-js))
+4. add the line `#!/usr/bin/env node` on top of the entry file of your app
+    - if you have troubles adding the above shebang line to your webpack-compiled module, try using `webpack.BannerPlugin` like so: `new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true })`, as shared in [this SO answer](https://stackoverflow.com/a/40763389/3429055).
+5. make the entry file executable (e.g. `chmod +x /path/to/your/entry.js`)
+
+and voilà, you can start it up with NGINX Unit as instructed in [this tutorial](https://unit.nginx.org/howto/samples/#node-js)
+
 ## ENV variables
 
 - `UNIX_SOCKET`: the unix socket at which the underlying `http` server listens, defaults to `undefined`, taking precedence over `HOST` and `PORT` (explained below) when defined
@@ -98,8 +114,11 @@ Why do we run tests for both `src` and `lib` directories? Because as library aut
 ## Migration
 
 ### from v3 to v8
-- the **somnus@8** API itself is backward compatible, so you should expect no breaking changes in this space
-- as `somnus` is always just a thin wrapper around `restify`, its major version will always match that of `restify`. Please consult the corresponding [Restify migration guide](http://restify.com/docs/home/) for breaking changes regarding Restify internal itself.
+- the **somnus@8** API itself is backward compatible, so you should expect no major breaking changes in this space
+- minor TypeScript update is needed (TypeScript will otherwise warn you the same):
+  - before: `import somnus, { RouteConfig } from "somnus"`
+  - after: `import somnus, { IRouteConfig } from "somnus"`
+- as `somnus` is designed to be just a thin wrapper around `restify`, starting v8, its major version will always match that of `restify`. Please consult the corresponding [Restify migration guide](http://restify.com/docs/home/) for breaking changes regarding Restify internal itself.
 
 ### from below to v3
 - If you have never used **somnus@1** or **somnus@2**, migration is of no concern for you

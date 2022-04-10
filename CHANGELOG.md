@@ -1,3 +1,17 @@
+## [8.2.0] - 2022-04-10
+### Changed
+- updated README
+- added webpack config `output.globalObject`
+- updated webpack config `output.library`
+- switched CI to travis-ci.com
+
+### Added
+- support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/)
+- `unit-http` filed as an optional dependency
+
+### Removed
+- the file `tslint.json` from the npm distribution package
+
 ## [8.1.0] - 2020-07-27
 ### Changed
 - examples are no longer run directly from 'npm scripts' but via `scripts/run-example.js`
