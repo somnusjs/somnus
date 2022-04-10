@@ -1,12 +1,13 @@
-## [8.2.0-alpha.2] - 2020-12-13
+## [8.2.0] - 2022-04-10
 ### Changed
-- wording in the README file
+- updated README
 - added webpack config `output.globalObject`
 - updated webpack config `output.library`
-- `unit-http` to become an optional dependency
+- switched CI to travis-ci.com
 
 ### Added
 - support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/)
+- `unit-http` filed as an optional dependency
 
 ### Removed
 - the file `tslint.json` from the npm distribution package

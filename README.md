@@ -3,7 +3,7 @@ SOMNUS
 
 Minimal, database-agnostic REST API Framework based on Restify
 
-[![Build Status](https://travis-ci.org/somnusjs/somnus.svg)](https://travis-ci.org/somnusjs/somnus)
+[![Build Status](https://app.travis-ci.com/somnusjs/somnus.svg?branch=master)](https://app.travis-ci.com/somnusjs/somnus)
 [![Package Quality](https://npm.packagequality.com/shield/somnus.svg)](https://packagequality.com/#?package=somnus)
 
 ## Features
@@ -76,11 +76,13 @@ somnus.start({ routeConfig });
 
 ## Usage with NGINX Unit
 
-Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) comes out-of-the-box starting from `somnus@8.2.0`. You only need to:
-1. take an existing `somnus`-based application (where `somnus` is at least at v8.2.0)
-2. install the `unit-http` module (`npm i unit-http`)
+Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) is available starting from `somnus@8.2.0`. To use your `somnus`-based application with Nginx Unit, you need to:
+1. ensure the `unit-http` module is installed (`npm i -g unit-http`). Nginx [recommends](https://unit.nginx.org/installation/#node-js) a global installation of this module
   - if you fail to install this module, be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
+2. `cd` into your existing `somnus`-based application (where `somnus` is at least at v8.2.0)
+3. link `unit-http` into your application (`npm link unit-http`) (as instructed [here](https://unit.nginx.org/howto/samples/#node-js))
 3. add the line `#!/usr/bin/env node` on top of the entry file of your app
+  - if you have troubles adding the above shebang line to your webpack-compiled module, try using `webpack.BannerPlugin` like so: `new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true })`, as shared in [this SO answer](https://stackoverflow.com/a/40763389/3429055).
 4. make the entry file executable (e.g. `chmod +x /path/to/your/entry.js`)
 
 and voilà, you can start it up with NGINX Unit as instructed in [this tutorial](https://unit.nginx.org/howto/samples/#node-js)
@@ -112,8 +114,11 @@ Why do we run tests for both `src` and `lib` directories? Because as library aut
 ## Migration
 
 ### from v3 to v8
-- the **somnus@8** API itself is backward compatible, so you should expect no breaking changes in this space
-- as `somnus` is always just a thin wrapper around `restify`, its major version will always match that of `restify`. Please consult the corresponding [Restify migration guide](http://restify.com/docs/home/) for breaking changes regarding Restify internal itself.
+- the **somnus@8** API itself is backward compatible, so you should expect no major breaking changes in this space
+- minor TypeScript update is needed (TypeScript will otherwise warn you the same):
+  - before: `import somnus, { RouteConfig } from "somnus"`
+  - after: `import somnus, { IRouteConfig } from "somnus"`
+- as `somnus` is designed to be just a thin wrapper around `restify`, starting v8, its major version will always match that of `restify`. Please consult the corresponding [Restify migration guide](http://restify.com/docs/home/) for breaking changes regarding Restify internal itself.
 
 ### from below to v3
 - If you have never used **somnus@1** or **somnus@2**, migration is of no concern for you
