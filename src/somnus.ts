@@ -3,7 +3,18 @@
 // NGINX Unit. Related info [here](https://github.com/nginx/unit/issues/230)
 const PROC_WAS_STARTED_BY_NGINX_UNIT: boolean = process.env.NXT_UNIT_INIT != null;
 
-if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
+// more recent versions of NGINX Unit `unit-http` supports its own custom loader
+// which makes it possible to run the app as-is without patching the `http` object;
+// therefore, we only patch when the user explicitly turns this mode on
+const IS_NGINX_UNIT_MANUAL_PATCH_MODE: boolean = process.env.IS_NGINX_UNIT_MANUAL_PATCH_MODE != null
+  && process.env.IS_NGINX_UNIT_MANUAL_PATCH_MODE !== 'false';
+
+const shouldPerformNginxUnitPatch: boolean = PROC_WAS_STARTED_BY_NGINX_UNIT
+  && IS_NGINX_UNIT_MANUAL_PATCH_MODE;
+
+if (shouldPerformNginxUnitPatch) {
+  // tslint:disable-next-line:no-console
+  console.warn('WARNING: RUNNING SOMNUS APP IN NGINX_UNIT_MANUAL_PATCH MODE')
   nginxUnitPatch();
 }
 
@@ -131,6 +142,7 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
   if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
     logger.info(`somnus framework started by NGINX Unit`);
+    logger.info(`IS_NGINX_UNIT_MANUAL_PATCH_MODE: ${IS_NGINX_UNIT_MANUAL_PATCH_MODE}`);
     logger.info(`ensure you configure NGINX Unit as instructed here: https://unit.nginx.org/howto/samples/#node-js`);
     if (cb) {
       cb();
@@ -139,8 +151,8 @@ function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
     const addr: restify.AddressInterface = server.address();
     const effectiveAddr: string = UNIX_SOCKET || `${addr.address}:${addr.port}`;
     logger.info(`somnus framework listening at ${effectiveAddr}`);
-    logger.info(`built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
-    logger.info(`logger level: ${bunyan.nameFromLevel[logger.level()]}`);
+    logger.info(`somnus was built for: ${process.env.NODE_ENV}`); // note that we let webpack overwrite this value in the dist build
+    logger.info(`somnus logger level: ${bunyan.nameFromLevel[logger.level()]}`);
     if (cb) {
       cb(addr);
     }
