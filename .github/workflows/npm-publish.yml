@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
-          scope: '@somnusjs'
+          scope: '@somnusjs/somnus'
 
       # see https://github.com/actions/setup-node/issues/130 for why we need to auth explicitly here
       # @TODO consider removing this step once the issue above is resolved
@@ -54,6 +54,6 @@ jobs:
           ~/.npmrc
 
       - name: 'Publishing to GitHub Packages'
-        run: cat ~/.npmrc && npm publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
