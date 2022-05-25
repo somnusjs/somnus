@@ -2,6 +2,7 @@ src
 scripts
 .babelrc
 .travis.yml
+.github
 webpack.config.js
 tslint.json
 

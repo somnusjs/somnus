@@ -1,7 +1,10 @@
-## [8.3.0] - 2022-05-25
+## [8.3.1] - 2022-05-25
 ### Changed
 - upgraded `restify` to v8.6.1
 - upgraded `bunyan` to 1.8.15
+
+### Removed
+- GitHub Action config files in the release tarball (which are irrelevant for the users)
 
 ## [8.2.1] - 2022-04-10
 ### Changed
