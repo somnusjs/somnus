@@ -34,6 +34,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
   publish-gpr:
+    if: ${{ always() }}  # no need for any dependency between github publishing and npm publishing
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +43,7 @@ jobs:
         with:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
-          alway-auth: true
+          alway-auth: true  # attempt to force re-auth now that we're interacting with another registry
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.github_token}}
