@@ -50,8 +50,6 @@ jobs:
       # @TODO consider removing this step once the issue above is resolved
       - name: 'Authenticate with the GitHub Packages registry'
         run:
-          npm set registry https://npm.pkg.github.com/ &&
-          npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }} &&
           echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
       - name: 'Publishing to GitHub Packages'
