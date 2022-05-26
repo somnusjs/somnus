@@ -1,7 +1,7 @@
 {
-  "name": "@somnusjs/somnus",
+  "name": "somnus",
   "description": "Minimal, database-agnostic REST API Framework based on Restify",
-  "version": "8.3.2-rc.3",
+  "version": "8.3.2-rc.4",
   "main": "lib/somnus.js",
   "types": "lib/somnus.d.ts",
   "scripts": {
