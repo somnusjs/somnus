@@ -1,3 +1,7 @@
+## [8.3.2] - 2022-05-26
+### Changed
+- officially rescoped under `@somnusjs` which is consistent between both npm and GitHub Packages registries
+
 ## [8.3.1] - 2022-05-25
 ### Changed
 - upgraded `restify` to v8.6.1
