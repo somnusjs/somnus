@@ -30,7 +30,7 @@ jobs:
           node-version: lts/*
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - name: 'publishing to npm'
+      - name: 'Publishing to npm'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -51,7 +51,9 @@ jobs:
       # @TODO consider removing this step once the issue above is resolved
       - name: 'Authenticate with the GitHub Packages registry'
         run:
-          npm set //npm.pkg.github.com/:_authToken ${{secrets.GITHUB_TOKEN}}
+          npm set registry https://npm.pkg.github.com/ &&
+          npm set //npm.pkg.github.com/:_authToken ${{secrets.GITHUB_TOKEN}} &&
+          npm whoami
 
       - name: 'Publishing to GitHub Packages'
         run: npm publish
