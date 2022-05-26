@@ -44,16 +44,16 @@ jobs:
         with:
           node-version: lts/*
           registry-url: https://npm.pkg.github.com/
-          scope: '@somnusjs/somnus'
+          scope: '@somnusjs'
+          always-auth: true
 
       # see https://github.com/actions/setup-node/issues/130 for why we need to auth explicitly here
       # @TODO consider removing this step once the issue above is resolved
       - name: 'Authenticate with the GitHub Packages registry'
         run:
-          echo "//npm.pkg.github.com:_authToken=${{secrets.GITHUB_TOKEN}}" >
-          ~/.npmrc
+          npm set //npm.pkg.github.com/:_authToken ${{secrets.GITHUB_TOKEN}}
 
       - name: 'Publishing to GitHub Packages'
-        run: npm publish --registry=https://npm.pkg.github.com
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
