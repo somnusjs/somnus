@@ -52,7 +52,7 @@ jobs:
         run:
           npm set registry https://npm.pkg.github.com/ &&
           npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }} &&
-          echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          npm whoami --registry=https://npm.pkg.github.com/
 
       - name: 'Publishing to GitHub Packages'
         run: npm publish --registry=https://npm.pkg.github.com/
