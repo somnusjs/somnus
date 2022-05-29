@@ -1,4 +1,4 @@
-#!/usr/bin/env node --experimental-top-level-await
+#!/usr/bin/env -S node --experimental-top-level-await
 
 // @TODO consider bailing out immediately if git state is dirty
 // as this util has only been tested for use under
