@@ -52,6 +52,9 @@ jobs:
         run:
           echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
+      - name: 'Scope the package to satisfy GitHub Packages scoping requirements'
+        run: './scripts/publish-gpr.mjs unsafe-rescope'
+
       - name: 'Publishing to GitHub Packages'
         run: npm publish
         env:
