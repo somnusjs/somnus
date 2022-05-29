@@ -1,3 +1,8 @@
+## [8.3.2] - 2022-05-30
+### Changed
+- GitHub Action config now supports both registries: npm (stable usage) and GitHub Packages (experimental usage)
+- upgraded several devDependencies, clearing out security issues reported by `npm audit`
+
 ## [8.3.1] - 2022-05-25
 ### Changed
 - upgraded `restify` to v8.6.1
