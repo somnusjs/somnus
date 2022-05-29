@@ -1,6 +1,7 @@
-## [8.3.2] - 2022-05-26
+## [8.3.2] - 2022-05-30
 ### Changed
-- officially rescoped under `@somnusjs` which is consistent between both npm and GitHub Packages registries
+- GitHub Action config now supports both registries: npm (stable usage) and GitHub Packages (experimental usage)
+- upgraded several devDependencies, clearing out security issues reported by `npm audit`
 
 ## [8.3.1] - 2022-05-25
 ### Changed
