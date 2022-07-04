@@ -1,3 +1,5 @@
+import { getIsNginxUnitPatched } from './isNginxUnitPatched';
+
 // until the `NXT_UNIT_INIT` env var is more verbosely documented, we admit that we
 // are using it at our own risk to determine when a Node.js process was started by
 // NGINX Unit. Related info [here](https://github.com/nginx/unit/issues/230)
@@ -12,10 +14,8 @@ const IS_NGINX_UNIT_MANUAL_PATCH_MODE: boolean = process.env.IS_NGINX_UNIT_MANUA
 const shouldPerformNginxUnitPatch: boolean = PROC_WAS_STARTED_BY_NGINX_UNIT
   && IS_NGINX_UNIT_MANUAL_PATCH_MODE;
 
-if (shouldPerformNginxUnitPatch) {
-  // tslint:disable-next-line:no-console
-  console.warn('WARNING: RUNNING SOMNUS APP IN NGINX_UNIT_MANUAL_PATCH MODE')
-  nginxUnitPatch();
+if (shouldPerformNginxUnitPatch && !getIsNginxUnitPatched()) {
+  throw new Error('nginxUnitPatch::nginxUnitPatch() must be invoked before somnus is imported');
 }
 
 import { ISomnus, ISomnusStartOptions } from '../src/somnus.d';
@@ -80,7 +80,7 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
   start(): void {
 
     let opts: ISomnusStartOptions | undefined;
-    let cb: (addr: restify.AddressInterface) => void | undefined;
+    let cb: ((addr: restify.AddressInterface) => void) | null = null;
     switch (arguments.length) {
       case 2 :
         opts = arguments[0] || {};
@@ -139,13 +139,16 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 
 });
 
-function onStarted(cb?: (addr?: restify.AddressInterface) => void): void {
+function onStarted(cb?: (addr: restify.AddressInterface) => void): void {
   if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
     logger.info(`somnus framework started by NGINX Unit`);
     logger.info(`IS_NGINX_UNIT_MANUAL_PATCH_MODE: ${IS_NGINX_UNIT_MANUAL_PATCH_MODE}`);
     logger.info(`ensure you configure NGINX Unit as instructed here: https://unit.nginx.org/howto/samples/#node-js`);
     if (cb) {
-      cb();
+      cb({
+        address: 'unit-http managed',
+        port: 'unit-http managed'
+      } as any); // force casting since this is an edge case (most people don't use the `unit-http` manual patch mode)
     }
   } else {
     const addr: restify.AddressInterface = server.address();
@@ -165,16 +168,3 @@ export {
 };
 
 export default somnus;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function nginxUnitPatch() {
-  const unitHttp = require('unit-http');
-  const http = require('http');
-  // patch the `http::createServer` method before `restify` uses it
-  http.createServer = unitHttp.createServer.bind(unitHttp);
-  // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L33
-  require('restify/lib/request')(unitHttp.IncomingMessage);
-  // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L32
-  require('restify/lib/response')(unitHttp.ServerResponse);
-}

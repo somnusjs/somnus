@@ -1,19 +1,30 @@
-const webpack = require('webpack');
-const path = require('path');
+import * as webpack from 'webpack';
+import * as path from 'path';
 
-module.exports = {
+const webpackConfig: webpack.Configuration = {
   entry: {
     // combined with `output.{path|filename}` (seen below), the line below shall produce `./lib/somnus.js` for the corresponding entry
-    somnus: './.tmp/somnus.js'
+    somnus: './.tmp/somnus.js',
+    nginxUnitPatch: './.tmp/nginxUnitPatch.js',
+    isNginxUnitPatched: './.tmp/isNginxUnitPatched.js'
   },
   externals: {
     'unit-http': 'commonjs unit-http'
   },
   target: 'node',
-  mode: process.env.WEBPACK_MODE,
+  mode: process.env.WEBPACK_MODE as 'none' | 'development' | 'production' || 'development',
+  optimization: {
+    mangleExports: false,
+    minimize: false
+  },
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: '[name].js', // mapped to named inputs in `entry` above
+    // filename: (pathData: any, assetInfo: webpack.AssetInfo) => {
+    //   // tslint:disable-next-line no-console
+    //   console.log(assetInfo);
+    //   return `${assetInfo.sourceFilename}.js`;
+    // },
     library: 'somnus',
     libraryTarget: 'umd',
     globalObject: 'this'
@@ -35,6 +46,8 @@ module.exports = {
   // },
   plugins: [
     // this fixes the 'require' issue mentioned [here](https://github.com/felixge/node-formidable/issues/337#issuecomment-153408479)
-    new webpack.DefinePlugin({ "global.GENTLY": false })
+    new webpack.DefinePlugin({ 'global.GENTLY': false })
   ]
 }
+
+export default webpackConfig;

@@ -1,0 +1,68 @@
+import * as assert from 'assert';
+import { getIsNginxUnitPatched } from '../src/isNginxUnitPatched';
+import * as isNginxUnitPatchedUtil from '../src/isNginxUnitPatched';
+
+describe('nginxUnitPatch', () => {
+
+  let countSetIsNginxUnitPatchedTrue: number = 0;
+
+  before(() => {
+
+    const mockedUnitHttp = require('./__mocks__/unitHttp');
+    const origSetIsNginxUnitPatchedTrue = isNginxUnitPatchedUtil.setIsNginxUnitPatchedTrue;
+    Object.defineProperty(isNginxUnitPatchedUtil, 'setIsNginxUnitPatchedTrue', {
+      value: () => {
+        countSetIsNginxUnitPatchedTrue++;
+        return origSetIsNginxUnitPatchedTrue();
+      }
+    });
+
+    require.cache[require.resolve('unit-http')] = {
+      isPreloading: false,
+      exports: mockedUnitHttp,
+      id: 'mocked-unit-http',
+      require: mockedUnitHttp,
+      filename: '',
+      loaded: true,
+      parent: null,
+      children: [],
+      path: '',
+      paths: []
+    };
+
+  });
+
+  after(() => {
+    delete require.cache[require.resolve('unit-http')];
+  });
+
+  it('should not be patched initially', () => {
+    assert(getIsNginxUnitPatched() === false);
+  });
+
+  it('should import the patcher successfully', async () => {
+
+    const patchResult = (await import('../src/nginxUnitPatch')).default;
+
+    // the patcher function returns the patching status as a boolean by default
+    // so we may assert that behavior just as well
+    assert(patchResult === true);
+
+    assert(countSetIsNginxUnitPatchedTrue === 1);
+
+  });
+
+  /**
+   * it's by design that importing `nginxUnitPatch` is an idempotent operation
+   * so we make sure that calling it the 2nd time would be a no-op
+   */
+  it('should be a no-op when importing the patcher the 2nd time', async () => {
+    await import('../src/nginxUnitPatch');
+    assert(countSetIsNginxUnitPatchedTrue === 1);
+  });
+
+  it('should be patched after the patcher was imported', () => {
+    assert(getIsNginxUnitPatched() === true);
+  });
+
+});

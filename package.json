@@ -16,6 +16,7 @@
     "test:dist": "TARGET_DIST_BUILD=true npm run test:base",
     "test": "npm run test:src && npm run test:dist",
     "prepublishOnly": "npm i; npm run build:prod; npm test",
+    "local-pack": "npm run build:prod && npm pack",
     "start": "npm run example:helloworld:ts",
     "example:helloworld:ts": "./scripts/run-example.js helloworld-ts",
     "example:helloworld:js": "./scripts/run-example.js helloworld-js",

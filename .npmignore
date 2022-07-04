@@ -3,10 +3,16 @@ scripts
 .babelrc
 .travis.yml
 .github
-webpack.config.js
+webpack.config.ts
 tslint.json
 
 .tmp
 deprecated
 test
 examples
+
+# local pack (`npm pack` result)
+somnus-*.tgz
+
+# GitHub file
+_config.yml
