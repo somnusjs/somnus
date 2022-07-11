@@ -16,10 +16,10 @@ const webpackConfig: webpack.Configuration = {
   },
   target: 'node',
   mode: process.env.WEBPACK_MODE as 'none' | 'development' | 'production' || 'development',
-  optimization: {
-    mangleExports: false,
-    minimize: false
-  },
+  // optimization: {
+  //   mangleExports: true,
+  //   minimize: true
+  // },
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: '[name].js', // mapped to named inputs in `entry` above

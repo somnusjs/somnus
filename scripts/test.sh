@@ -7,7 +7,7 @@ cd "$CURRENT_SCRIPT_ABS_DIR./../";
 
 # one of the test suites requires `unit-http` to be available. Installing it correctly might
 # not be straightforward at 1st, so to achieve better DX, we'll just provision a mock by default;
-# any developer who wishes to install it for real and overwrite the provisioned mock any time
+# any developer who wishes to install it for real can overwrite the provisioned mock any time
 mkdir -p node_modules/unit-http
 echo "module.exports = 'mock'" > node_modules/unit-http/index.js
 
