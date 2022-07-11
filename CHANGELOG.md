@@ -1,7 +1,7 @@
 ## [8.4.0] - 2022-07-11
 ### Changed
 - truly decoupled `unit-http` from `somnus` in user-land (see https://github.com/somnusjs/somnus/issues/33)
-- upgraded several dependencies
+- upgraded the `webpack-cli` dev dependency
 
 ## [8.3.2] - 2022-05-30
 ### Changed
