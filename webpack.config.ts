@@ -9,7 +9,10 @@ const webpackConfig: webpack.Configuration = {
     isNginxUnitPatched: './.tmp/isNginxUnitPatched.js'
   },
   externals: {
-    'unit-http': 'commonjs unit-http'
+    // the keys here map to anything we would `import` in any of the somnus code files; so anything added here
+    // won't be compiled together in the output, and the consuming code should import them separately
+    'unit-http': 'commonjs unit-http', // client code would do: `import "unit-http"`
+    './isNginxUnitPatched': 'commonjs somnus/lib/isNginxUnitPatched' // client code would do: `import "somnus/lib/isNginxUnitPatched"`
   },
   target: 'node',
   mode: process.env.WEBPACK_MODE as 'none' | 'development' | 'production' || 'development',
@@ -20,11 +23,6 @@ const webpackConfig: webpack.Configuration = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: '[name].js', // mapped to named inputs in `entry` above
-    // filename: (pathData: any, assetInfo: webpack.AssetInfo) => {
-    //   // tslint:disable-next-line no-console
-    //   console.log(assetInfo);
-    //   return `${assetInfo.sourceFilename}.js`;
-    // },
     library: 'somnus',
     libraryTarget: 'umd',
     globalObject: 'this'

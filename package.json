@@ -1,7 +1,7 @@
 {
   "name": "somnus",
   "description": "Minimal, database-agnostic REST API Framework based on Restify",
-  "version": "8.3.2",
+  "version": "8.4.0",
   "main": "lib/somnus.js",
   "types": "lib/somnus.d.ts",
   "scripts": {
@@ -14,7 +14,7 @@
     "test:base": "mocha --require ts-node/register --file test/setup.js -R spec test/**/*.ts test/*.ts",
     "test:src": "TARGET_DIST_BUILD=false npm run test:base",
     "test:dist": "TARGET_DIST_BUILD=true npm run test:base",
-    "test": "npm run test:src && npm run test:dist",
+    "test": "./scripts/test.sh",
     "prepublishOnly": "npm i; npm run build:prod; npm test",
     "local-pack": "npm run build:prod && npm pack",
     "start": "npm run example:helloworld:ts",
@@ -48,7 +48,7 @@
     "tslint": "^6.1.2",
     "typescript": "^3.9.7",
     "webpack": "^5.72.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^4.10.0"
   },
   "engines": {
     "node": ">= 10.14.2"

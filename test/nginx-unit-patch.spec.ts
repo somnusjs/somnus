@@ -1,19 +1,19 @@
 import * as assert from 'assert';
-import { getIsNginxUnitPatched } from '../src/isNginxUnitPatched';
+import { getNginxUnitPatched } from '../src/isNginxUnitPatched';
 import * as isNginxUnitPatchedUtil from '../src/isNginxUnitPatched';
 
 describe('nginxUnitPatch', () => {
 
-  let countSetIsNginxUnitPatchedTrue: number = 0;
+  let countSetNginxUnitPatched: number = 0;
 
   before(() => {
 
     const mockedUnitHttp = require('./__mocks__/unitHttp');
-    const origSetIsNginxUnitPatchedTrue = isNginxUnitPatchedUtil.setIsNginxUnitPatchedTrue;
-    Object.defineProperty(isNginxUnitPatchedUtil, 'setIsNginxUnitPatchedTrue', {
+    const origSetNginxUnitPatched = isNginxUnitPatchedUtil.setNginxUnitPatched;
+    Object.defineProperty(isNginxUnitPatchedUtil, 'setNginxUnitPatched', {
       value: () => {
-        countSetIsNginxUnitPatchedTrue++;
-        return origSetIsNginxUnitPatchedTrue();
+        countSetNginxUnitPatched++;
+        return origSetNginxUnitPatched();
       }
     });
 
@@ -37,7 +37,7 @@ describe('nginxUnitPatch', () => {
   });
 
   it('should not be patched initially', () => {
-    assert(getIsNginxUnitPatched() === false);
+    assert(getNginxUnitPatched() === undefined);
   });
 
   it('should import the patcher successfully', async () => {
@@ -48,7 +48,7 @@ describe('nginxUnitPatch', () => {
     // so we may assert that behavior just as well
     assert(patchResult === true);
 
-    assert(countSetIsNginxUnitPatchedTrue === 1);
+    assert(countSetNginxUnitPatched === 1);
 
   });
 
@@ -58,11 +58,11 @@ describe('nginxUnitPatch', () => {
    */
   it('should be a no-op when importing the patcher the 2nd time', async () => {
     await import('../src/nginxUnitPatch');
-    assert(countSetIsNginxUnitPatchedTrue === 1);
+    assert(countSetNginxUnitPatched === 1);
   });
 
   it('should be patched after the patcher was imported', () => {
-    assert(getIsNginxUnitPatched() === true);
+    assert(getNginxUnitPatched() === true);
   });
 
 });

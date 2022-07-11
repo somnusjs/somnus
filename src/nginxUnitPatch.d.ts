@@ -1,1 +1,2 @@
-export const nginxUnitPatch: () => void
+declare const isNginxUnitPatched: true | undefined;
+export default isNginxUnitPatched;

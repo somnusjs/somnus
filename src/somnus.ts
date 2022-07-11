@@ -1,4 +1,4 @@
-import { getIsNginxUnitPatched } from './isNginxUnitPatched';
+import { getNginxUnitPatched } from './isNginxUnitPatched';
 
 // until the `NXT_UNIT_INIT` env var is more verbosely documented, we admit that we
 // are using it at our own risk to determine when a Node.js process was started by
@@ -14,8 +14,8 @@ const IS_NGINX_UNIT_MANUAL_PATCH_MODE: boolean = process.env.IS_NGINX_UNIT_MANUA
 const shouldPerformNginxUnitPatch: boolean = PROC_WAS_STARTED_BY_NGINX_UNIT
   && IS_NGINX_UNIT_MANUAL_PATCH_MODE;
 
-if (shouldPerformNginxUnitPatch && !getIsNginxUnitPatched()) {
-  throw new Error('nginxUnitPatch::nginxUnitPatch() must be invoked before somnus is imported');
+if (shouldPerformNginxUnitPatch && !getNginxUnitPatched()) {
+  throw new Error('somnus/lib/nginxUnitPatch must be imported before somnus itself is imported');
 }
 
 import { ISomnus, ISomnusStartOptions } from '../src/somnus.d';

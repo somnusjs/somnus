@@ -1,3 +1,8 @@
+## [8.4.0] - 2022-07-10
+### Changed
+- truly decoupled `unit-http` from `somnus` in user-land (see https://github.com/somnusjs/somnus/issues/33)
+- upgraded several dependencies
+
 ## [8.3.2] - 2022-05-30
 ### Changed
 - GitHub Action config now supports both registries: npm (stable usage) and GitHub Packages (experimental usage)

@@ -1,7 +1,7 @@
-import { getIsNginxUnitPatched, setIsNginxUnitPatchedTrue } from './isNginxUnitPatched';
+import { getNginxUnitPatched, setNginxUnitPatched } from './isNginxUnitPatched';
 
 function nginxUnitPatch() {
-  if (getIsNginxUnitPatched()) return;
+  if (getNginxUnitPatched()) return;
 
   const unitHttp = require('unit-http');
   const http = require('http');
@@ -12,9 +12,9 @@ function nginxUnitPatch() {
   // see more here: https://github.com/restify/node-restify/blob/9153587c023a876237c1d8bc7491fee4984d9074/lib/server.js#L32
   require('restify/lib/response')(unitHttp.ServerResponse);
 
-  setIsNginxUnitPatchedTrue();
+  setNginxUnitPatched();
 }
 
 nginxUnitPatch();
 
-export default getIsNginxUnitPatched();
+export default getNginxUnitPatched();
