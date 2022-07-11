@@ -24,6 +24,8 @@ echo "webpack is building for $WEBPACK_MODE"
 # --mode $WEBPACK_MODE
 
 # webpack.config flavour
-webpack --config webpack.config.js
+webpack --config webpack.config.ts
 
-cp src/somnus.d.ts lib/
+# we manually write TypeDef files for our code, so we manually copy them
+# to the dist folder
+cp src/*.d.ts lib/

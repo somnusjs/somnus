@@ -1,3 +1,11 @@
+## [8.4.0] - 2022-07-11
+### Changed
+- truly decoupled `unit-http` from `somnus` in user-land (see https://github.com/somnusjs/somnus/issues/33)
+- upgraded a few dependencies
+
+### Added
+- the command `npm run local-pack` which prepares a somnus tarball for local installation (wraps `npm pack`)
+
 ## [8.3.2] - 2022-05-30
 ### Changed
 - GitHub Action config now supports both registries: npm (stable usage) and GitHub Packages (experimental usage)
