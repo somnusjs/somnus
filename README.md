@@ -111,13 +111,14 @@ npm test
 
 Why do we run tests for both `src` and `lib` directories? Because as library authors, we're responsible for ensuring that the build process transpiles & outputs as it should, and the best way to do that is by testing the code from both source and dist.
 
-### Why do I get the error "Cannot find module 'unit-http'"?
+## How to install 'unit-http'?
 
-Since `v8.4.0`, a unit test suite is added to ensure a unit-http -related feature is covered.
-Therefore, executing the entire test suite requires this module. To install `unit-http`, follow the following example steps:
-- install the corresponding system dependencies: https://unit.nginx.org/installation/
-- install the `unit-http` Node.js module itself using `npm i -g unit-http`
-- link the global `unit-http` to the somnus project using `npm link unit-http`
+Integration with Nginx's `unit-http` was added in `v8.2.0` and a rudimentary unit test suite for it was added in `v8.4.0`.
+It is not required to have `unit-http` installed to develop somnus.js; however, if you really want to install `unit-http`,
+feel free to follow the following example steps:
+1. install the corresponding native system dependencies: https://unit.nginx.org/installation/
+2. install the `unit-http` Node.js module itself using `npm i -g unit-http`
+3. link the global `unit-http` to the somnus project using `npm link unit-http`
 
 Note that the instruction above is for example only. It should work for most use cases, but you are free to
 install `unit-http` however best fits your project/system setup.

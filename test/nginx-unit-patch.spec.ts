@@ -17,6 +17,9 @@ describe('nginxUnitPatch', () => {
       }
     });
 
+    // @NOTE that `unit-http` must be resolvable in the first place
+    // (e.g. `node_modules/unit-http` exists)
+    // before we can even mock it as shown below
     require.cache[require.resolve('unit-http')] = {
       isPreloading: false,
       exports: mockedUnitHttp,

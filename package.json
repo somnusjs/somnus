@@ -29,7 +29,7 @@
     "restify-errors": "^8.0.2"
   },
   "optionalDependencies": {
-    "unit-http": "^1.26.1"
+    "unit-http": "^1.27.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
