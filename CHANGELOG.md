@@ -1,4 +1,4 @@
-## [8.4.0] - 2022-07-10
+## [8.4.0] - 2022-07-11
 ### Changed
 - truly decoupled `unit-http` from `somnus` in user-land (see https://github.com/somnusjs/somnus/issues/33)
 - upgraded several dependencies
