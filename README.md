@@ -19,9 +19,9 @@ While the original developer's intention is to add commonly essential features o
 
 ## Developer & User notices
 
-Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of Node.js](https://github.com/nodejs/LTS) (for example `10.14.2` at writing time). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
+Somnus strongly promotes the use of next-gen JavaScript (ES6, ES7, etc.). Hence, it will most likely always enforce the latest [LTS version of Node.js](https://github.com/nodejs/LTS) (for example `10.14.2` when this project was first started). Besides, it encourages the use of [modern JS features](https://github.com/lukehoban/es6features) such as **arrow functions**, **const identifier** and others (where they make sense).
 
-Starting v8.2.0, somnus has Nginx Unit integration support. If you fail to install Unit's language module for Node.js (`npm i unit-http`), be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
+Starting v8.2.0, somnus has NGINX Unit integration support built in. Please see [this section](#usage-with-nginx-unit) for details.
 
 ## Installation
 
@@ -76,8 +76,8 @@ somnus.start({ routeConfig });
 
 ## Usage with NGINX Unit
 
-Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) is available starting from `somnus@8.2.0`. To use your `somnus`-based application with Nginx Unit, you need to:
-1. ensure the `unit-http` module is installed (`npm i -g unit-http`). Nginx [recommends](https://unit.nginx.org/installation/#node-js) a global installation of this module
+Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) is available starting from `somnus@8.2.0`. To use your `somnus`-based application with NGINX Unit, you need to:
+1. ensure the `unit-http` module is installed (`npm i -g unit-http`). NGINX [recommends](https://unit.nginx.org/installation/#node-js) a global installation of this module
     - if you fail to install this module, be sure to follow up [Unit's installation guide](http://unit.nginx.org/installation/) itself first. For example, MacOS users may want to follow the [homebrew guide](https://github.com/nginx/homebrew-unit).
 2. `cd` into your existing `somnus`-based application (where `somnus` is at least at v8.2.0)
 3. link `unit-http` into your application (`npm link unit-http`) (as instructed [here](https://unit.nginx.org/howto/samples/#node-js))
@@ -86,6 +86,8 @@ Support for [NGINX Unit](https://www.nginx.com/blog/introducing-nginx-unit/) is 
 5. make the entry file executable (e.g. `chmod +x /path/to/your/entry.js`)
 
 and voilà, you can start it up with NGINX Unit as instructed in [this tutorial](https://unit.nginx.org/howto/samples/#node-js)
+
+Further integration instructions are available in [this documentation](docs/nginx-unit-integration.md)
 
 ## ENV variables
 
@@ -110,18 +112,6 @@ npm test
 ```
 
 Why do we run tests for both `src` and `lib` directories? Because as library authors, we're responsible for ensuring that the build process transpiles & outputs as it should, and the best way to do that is by testing the code from both source and dist.
-
-## How to install 'unit-http'?
-
-Integration with Nginx's `unit-http` was added in `v8.2.0` and a rudimentary unit test suite for it was added in `v8.4.0`.
-It is not required to have `unit-http` installed to develop somnus.js; however, if you really want to install `unit-http`,
-feel free to follow the following example steps:
-1. install the corresponding native system dependencies: https://unit.nginx.org/installation/
-2. install the `unit-http` Node.js module itself using `npm i -g unit-http`
-3. link the global `unit-http` to the somnus project using `npm link unit-http`
-
-Note that the instruction above is for example only. It should work for most use cases, but you are free to
-install `unit-http` however best fits your project/system setup.
 
 ## Migration
 
