@@ -66,7 +66,7 @@ server.use(restify.plugins.bodyParser({ mapParams: true }));
 // catch all
 server.on('restifyError', (req, res, err, cb) => {
   if (!err.handled) {
-    logger.error({ unhandleRestifyError: err });
+    logger.error({ unhandledRestifyError: err });
   }
   return cb();
 });
