@@ -4,10 +4,9 @@
 name: Pull Request Workflow
 
 on:
-  push:
-    branches: [ "!master", "!dependabot/*" ]
   pull_request:
-    branches: [ "!master", "!dependabot/*" ]
+  push:
+    branches-ignore: [ "master", "dependabot/*" ]
 
 jobs:
   build:
