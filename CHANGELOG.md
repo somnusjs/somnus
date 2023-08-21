@@ -1,10 +1,11 @@
-## [11.0.0] - 2023-08-21
+## [11.0.0] - 2023-08-22
 ### Changed
 - general dependency upgrades inc. `restify@11`
-- Node.js v18 is supported, potentially dropping support for older (end-of-life) Node.js versions
+- Node.js v18 is supported
 - updated a few examples to adapt the `async/await` syntax for route handler declaration
 
 ## Removed
+- support for older (end-of-life / near end-of-life) Node.js versions (e.g. v16 and below)
 - `tslint.json` config (in favour of `eslint`); the removed config is quoted below for historic reasons:
   ```
   {
@@ -23,6 +24,7 @@
     "rulesDirectory": []
   }
   ```
+- Travis-CI integration (in favour of GitHub Actions)
 
 ## [8.4.0] - 2022-07-11
 ### Changed
