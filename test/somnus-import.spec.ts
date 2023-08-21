@@ -2,7 +2,7 @@
 // import it multiple times and/or dynamically import it;
 // expected: only 1 instance of the Restify Server is ever created whatsoever
 
-import * as assert from 'assert';
+import assert from 'node:assert';
 import Somnus1 from '../src/somnus';
 import Somnus2 from '../src/somnus';
 

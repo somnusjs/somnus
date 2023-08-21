@@ -10,6 +10,10 @@ tslint.json
 deprecated
 test
 examples
+tsconfig.json
+.eslintignore
+.eslintrc.js
+tslint-to-eslint-config.log
 
 # local pack (`npm pack` result)
 somnus-*.tgz
