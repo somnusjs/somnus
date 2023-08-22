@@ -57,7 +57,7 @@
     "webpack-cli": "^5.1.4"
   },
   "engines": {
-    "node": ">= 10.14.2"
+    "node": ">= 18"
   },
   "repository": {
     "type": "git",
