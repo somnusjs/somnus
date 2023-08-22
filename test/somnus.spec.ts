@@ -1,12 +1,13 @@
+// @ts-nocheck
 import { ISomnus, IRouteConfig } from '../src/somnus.d';
 
 // this is actually declared in `setup.js` that runs before all tests
 declare const somnus: ISomnus;
 
-import * as assert from 'assert';
-import fetch, { Response } from 'node-fetch';
+import assert from 'node:assert';
 
-describe('somnus', () => {
+describe('somnus', function() {
+  this.timeout(5000); // so somnus has enough time to stop after each test
 
   let currentPort: number = NaN;
 
@@ -33,7 +34,7 @@ describe('somnus', () => {
   describe('with a malformed `routeConfig`', () => {
 
     const malformedRouteConfig: IRouteConfig = {
-      'get /bad route config': (req, res) => res.send(500)
+      'get /bad route config': (req, res, next) => res.send(500)
     };
 
     it('should throw the correct error', () => {
@@ -57,9 +58,9 @@ describe('somnus', () => {
         (req, res, next) => next(),
         (req, res, next) => res.send({ foo: req.params.foo })
       ],
-      '   put /echo': (req, res) => res.send({ message: req.params }),
-      'delete /echo': (req, res) => res.send({ message: '`delete` understood as `del`' }),
-      '<>{}\~/patch*!@#$%^&()   /echo': (req, res) => res.send({ message: 'weird verbs? no problemo' })
+      '   put /echo': (req, res, next) => res.send({ message: req.params }),
+      'delete /echo': (req, res, next) => res.send({ message: '`delete` understood as `del`' }),
+      '<>{}\~/patch*!@#$%^&()   /echo': (req, res, next) => res.send({ message: 'weird verbs? no problemo' }),
     };
 
     beforeEach((done) => {

@@ -13,7 +13,7 @@ let mod;
 delete require.cache[require.resolve(modulePath)];
 
 const routeConfig = {
-  'get /hello': (req, res) => res.send('world')
+  'get /hello': (req, res, next) => res.send('world')
 };
 
 async function main() {

@@ -8,6 +8,11 @@ const somnus = require('../../lib/somnus').default;
 
 somnus.start({
   routeConfig: {
-    'get /hello': (req, res) => res.send('world')
+    'get /hello': async (req, res) => {
+      res.send('world');
+    },
+    'get /hi': (req, res, next) => {
+      res.send('earth');
+    }
   }
 });

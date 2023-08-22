@@ -1,4 +1,4 @@
-import * as assert from 'assert';
+import assert from 'node:assert';
 import { getNginxUnitPatched } from '../src/isNginxUnitPatched';
 import * as isNginxUnitPatchedUtil from '../src/isNginxUnitPatched';
 

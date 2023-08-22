@@ -8,14 +8,17 @@ import somnus, { IRouteConfig } from '../../lib/somnus';
 
 // you can add routes via the standard syntax
 // as you would normally do with `express` or `restify`
-somnus.server.get('/echo', (req, res) => res.send('echo echo'));
+somnus.server.get('/echo', (req, res, next) => res.send('echo echo'));
 
 // or you can add routes by declaring a `routeConfig` object,
 // which is then passed into `somnus.start()` method
 const routeConfig: IRouteConfig = {
   'get /hello': [
     (req, res, next): void => next(),
-    (req, res, next): void => res.send('world')
+    async (req, res): Promise<void> => {
+      const retVal = await Promise.resolve('world');
+      res.send(retVal);
+    }
   ]
 };
 

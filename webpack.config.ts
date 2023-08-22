@@ -12,7 +12,7 @@ const webpackConfig: webpack.Configuration = {
     // the keys here map to anything we would `import` in any of the somnus code files; so anything added here
     // won't be compiled together in the output, and the consuming code should import them separately
     'unit-http': 'commonjs unit-http', // client code would do: `import "unit-http"`
-    './isNginxUnitPatched': 'commonjs somnus/lib/isNginxUnitPatched' // client code would do: `import "somnus/lib/isNginxUnitPatched"`
+    'somnus/lib/isNginxUnitPatched': 'commonjs somnus/lib/isNginxUnitPatched' // client code would do: `import "somnus/lib/isNginxUnitPatched"`
   },
   target: 'node',
   mode: process.env.WEBPACK_MODE as 'none' | 'development' | 'production' || 'development',

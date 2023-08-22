@@ -4,16 +4,16 @@ let cmd = `echo 'Please provide a valid example name'`;
 switch (process.argv[2]) {
 
   case 'helloworld-js':
-    cmd = `LOG_LEVEL=info node examples/helloworld-js | $(npm bin)/bunyan -o short`;
+    cmd = `LOG_LEVEL=info node examples/helloworld-js | npx bunyan -o short`;
     break;
 
   case 'helloworld-ts':
-    cmd = `LOG_LEVEL=info PORT=3001 $(npm bin)/ts-node examples/helloworld-ts | $(npm bin)/bunyan -o short`;
+    cmd = `LOG_LEVEL=info PORT=3001 npx ts-node examples/helloworld-ts | npx bunyan -o short`;
     break;
 
   case 'unix-socket':
     cmd = `cd examples/unix-socket/; ` +
-      `LOG_LEVEL=info UNIX_SOCKET=example.sock $(npm bin)/ts-node unix-socket-example.ts | $(npm bin)/bunyan -o short`;
+      `LOG_LEVEL=info UNIX_SOCKET=example.sock npx ts-node unix-socket-example.ts | npx bunyan -o short`;
 
   default:
     break;

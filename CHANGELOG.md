@@ -1,3 +1,31 @@
+## [11.0.0] - 2023-08-22
+### Changed
+- general dependency upgrades inc. `restify@11`
+- Node.js v18 is supported
+- updated a few examples to adapt the `async/await` syntax for route handler declaration
+
+## Removed
+- support for older (end-of-life / near end-of-life) Node.js versions (e.g. v16 and below)
+- `tslint.json` config (in favour of `eslint`); the removed config is quoted below for historic reasons:
+  ```
+  {
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+      "quotemark": [true, "single"],
+      "ordered-imports": [false],
+      "object-literal-sort-keys": [false],
+      "only-arrow-functions": [false],
+      "forin": false
+    },
+    "rulesDirectory": []
+  }
+  ```
+- Travis-CI integration (in favour of GitHub Actions)
+
 ## [8.4.0] - 2022-07-11
 ### Changed
 - truly decoupled `unit-http` from `somnus` in user-land (see https://github.com/somnusjs/somnus/issues/33)

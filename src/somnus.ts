@@ -50,7 +50,7 @@ const server: restify.Server = restify.createServer({
 
 const logger: bunyan = server.log;
 
-// tslint:disable-next-line:no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-call
 require('gracefulize')(server, { log: logger.info.bind(logger) });
 
 // things to take care of for the users:
@@ -64,13 +64,16 @@ server.use(restify.plugins.queryParser({ mapParams: true }));
 server.use(restify.plugins.bodyParser({ mapParams: true }));
 
 // catch all
-server.on('restifyError', (req, res, err, cb) => {
+server.on('restifyError', (req, res, err, cb: () => any): any => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (!err.handled) {
-    logger.error({ unhandleRestifyError: err });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    logger.error({ unhandledRestifyError: err });
   }
-  return cb();
+  return cb(); // eslint-disable-line @typescript-eslint/no-unsafe-return
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const somnus: ISomnus = Object.assign(Object.create(null), {
 
   server, // should not be used heavily in userland; included for advanced uses only
@@ -79,6 +82,7 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 
   start(): void {
 
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment, prefer-rest-params */
     let opts: ISomnusStartOptions | undefined;
     let cb: ((addr: restify.AddressInterface) => void) | null = null;
     switch (arguments.length) {
@@ -120,12 +124,13 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
           verb = 'del';
         }
 
-        // e.g. server.get('/some-route', someHandler)
-        server[verb](path, handler);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        (server as any)[verb](path, handler); // e.g. server.get('/some-route', someHandler)
 
       }
 
     }
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment, prefer-rest-params */
 
     if (UNIX_SOCKET) {
       server.listen(UNIX_SOCKET, onStarted.bind(undefined, cb));
@@ -135,17 +140,17 @@ const somnus: ISomnus = Object.assign(Object.create(null), {
 
   },
 
-  stop: (cb?): void => server.close(cb),
+  stop: (cb?: () => any): any => server.close(cb),
 
-});
+} as ISomnus);
 
-function onStarted(cb?: (addr: restify.AddressInterface) => void): void {
+function onStarted(cb?: ((addr: restify.AddressInterface) => void) | null): void {
   if (PROC_WAS_STARTED_BY_NGINX_UNIT) {
-    logger.info(`somnus framework started by NGINX Unit`);
+    logger.info('somnus framework started by NGINX Unit');
     logger.info(`IS_NGINX_UNIT_MANUAL_PATCH_MODE: ${IS_NGINX_UNIT_MANUAL_PATCH_MODE}`);
-    logger.info(`ensure you configure NGINX Unit as instructed here: https://unit.nginx.org/howto/samples/#node-js`);
+    logger.info('ensure you configure NGINX Unit as instructed here: https://unit.nginx.org/howto/samples/#node-js');
     if (cb) {
-      cb({
+      cb({ // eslint-disable-line @typescript-eslint/no-unsafe-argument
         address: 'unit-http managed',
         port: 'unit-http managed'
       } as any); // force casting since this is an edge case (most people don't use the `unit-http` manual patch mode)
