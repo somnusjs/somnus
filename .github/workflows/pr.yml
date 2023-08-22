@@ -5,7 +5,7 @@ name: Pull Request
 
 on:
   pull_request:
-    branches-ignore: [ "master", "dependabot/*" ]
+    branches: [ "master" ]
 
 jobs:
   test:
